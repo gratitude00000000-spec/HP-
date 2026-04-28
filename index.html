@@ -436,7 +436,7 @@
       .nav, .header-cta { display: none; }
       .menu-toggle { display: inline-grid; place-items: center; }
       .site-header.open .nav { display: flex; position: absolute; left: 14px; right: 14px; top: 80px; background: rgba(3,21,59,.98); border: 4px solid #fff; border-radius: 18px; padding: 18px; flex-direction: column; align-items: flex-start; gap: 16px; }
-      .site-header.open .header-cta { display: flex; position: absolute; left: 14px; right: 14px; top: 316px; background: rgba(3,21,59,.98); border: 4px solid #fff; border-radius: 18px; padding: 16px; flex-direction: column; align-items: stretch; }
+      .site-header.open .header-cta { display: flex; position: absolute; left: 14px; right: 14px; top: 356px; background: rgba(3,21,59,.98); border: 4px solid #fff; border-radius: 18px; padding: 16px; flex-direction: column; align-items: stretch; }
       .pricing-grid, .faq-wrap { grid-template-columns: 1fr; }
       .flow-grid { grid-template-columns: repeat(2, 1fr); }
       .flow-step:not(:last-child)::after { display: none; }
@@ -455,14 +455,21 @@
       body { line-height: 1.65; }
       .container { width: min(var(--max), calc(100% - 18px)); }
       .section { padding: 46px 0; }
-      .section-title { letter-spacing: 0; text-wrap: balance; }
-      .brand strong { font-size: 17px; }
+      .section-title { letter-spacing: 0; text-wrap: balance; font-size: clamp(24px, 6.5vw, 36px); }
+      /* ヘッダー：AIに選ばれるHP制作を大きく */
+      .brand strong { font-size: 11px; font-weight: 800; opacity: 0.75; white-space: nowrap; }
+      .brand span { font-size: 15px !important; color: #fff !important; font-weight: 1000; }
+      /* 白い斜線・スピードラインを非表示 */
+      .speed-lines { display: none; }
+      .hero::before { background: repeating-radial-gradient(circle at 15% 15%, rgba(255,255,255,.18) 0 2px, transparent 2px 8px); }
       .hero { padding: 40px 0 38px; }
-      .hero-copy h1 { font-size: clamp(22px, 5.8vw, 30px); letter-spacing: 0; word-break: normal; overflow-wrap: break-word; }
+      .hero-copy h1 { font-size: clamp(26px, 7vw, 36px); letter-spacing: 0; word-break: normal; overflow-wrap: break-word; }
       .comic-label { font-size: 12px; padding: 5px 10px; }
-      .hero-copy p { font-size: 16px; }
-      .zero-badge { font-size: 15px; }
-      .zero-badge strong { font-size: 24px; }
+      .hero-copy p { font-size: 14px; line-height: 1.6; }
+      .zero-badge { font-size: 13px; flex-wrap: wrap; gap: 4px; }
+      .zero-badge strong { font-size: 22px; }
+      .hero-badges { gap: 6px; }
+      .hero-badge { font-size: 12px; padding: 6px 10px; }
       .hero-visual { min-height: auto; flex-direction: column; padding-top: 20px; }
       .device-panel { width: 286px; left: auto; top: auto; transform: rotate(-4deg); margin: 0 auto; }
       .comic-person { width: 176px; height: 280px; right: auto; bottom: auto; position: relative; margin: -40px auto 0; transform: scale(.92); }
@@ -475,18 +482,40 @@
       .speech { width: 166px; right: 0; bottom: 86px; font-size: 15px; }
       .star.s2 { right: 20px; }
       .problem-grid, .reason-grid, .flow-grid { grid-template-columns: 1fr; }
+      .problem-card h3 { font-size: 18px; }
       .section-head, .footer-top { flex-direction: column; align-items: flex-start; }
-      .solution-panel, .compare-panel, .flow-panel, .company-panel { padding: 22px; }
+      .solution-panel, .compare-panel, .flow-panel, .company-panel { padding: 18px; }
       .solution-panel .section-title,
       .compare-panel .section-title,
       .flow-panel .section-title,
-      .company-panel .section-title { font-size: clamp(27px, 8vw, 38px); }
+      .company-panel .section-title { font-size: clamp(22px, 6.5vw, 34px); }
+      .burst-item { font-size: 14px; padding: 10px 12px; }
+      .reason-card h3 { font-size: 17px; }
+      .reason-card p { font-size: 13px; }
+      .compare-cell { padding: 10px 8px; font-size: 13px; }
+      /* 料金プラン */
       .pricing-card.featured { transform: none; }
+      .plan-price { font-size: 32px; padding: 16px 14px 4px; }
+      .plan-price small { font-size: 12px; }
       .card-body { padding: 18px; }
-      .plan-name { font-size: 24px; }
+      .plan-name { font-size: 20px; }
       .plan-ribbon { right: 12px; top: 8px; font-size: 11px; padding: 5px 10px; }
+      /* FAQ */
+      .faq-question { font-size: 13px; padding: 14px 12px; }
+      .faq-answer-inner { font-size: 13px; }
+      /* 会社概要 */
       .company-item { grid-template-columns: 1fr; gap: 2px; }
+      .company-item span:first-child { font-size: 12px; }
+      /* CTAセクション */
+      .cta-grid { gap: 20px; }
+      .cta-card { transform: none; font-size: 14px; padding: 18px; }
+      .speech-small { font-size: 14px; padding: 10px 14px; }
+      /* フッター */
+      .footer-nav { gap: 12px; font-size: 13px; }
       .btn { width: 100%; }
+      .btn-row { gap: 10px; }
+      /* section-lead */
+      .section-lead { font-size: 14px; }
     }
   </style>
 </head>
@@ -498,6 +527,7 @@
         <div><strong>株式会社Gratitude</strong><span>AIに選ばれるHP制作</span></div>
       </a>
       <nav class="nav" aria-label="グローバルナビゲーション">
+        <a href="#top">▲ トップへ</a>
         <a href="#service">特徴</a>
         <a href="#ai-seo">集客の仕組み</a>
         <a href="#compare">他社比較</a>
