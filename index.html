@@ -463,9 +463,12 @@
       .speed-lines { display: none; }
       .hero::before { background: repeating-radial-gradient(circle at 15% 15%, rgba(255,255,255,.18) 0 2px, transparent 2px 8px); }
       .hero { padding: 40px 0 38px; }
-      .hero-copy h1 { font-size: clamp(26px, 7vw, 36px); letter-spacing: 0; word-break: normal; overflow-wrap: break-word; }
+      /* 文字の折り返しを自然に：text-wrap:balanceを無効化 */
+      .section-title { text-wrap: unset; overflow-wrap: break-word; }
+      .section-lead { text-wrap: unset; overflow-wrap: break-word; font-size: 14px; text-align: left; }
+      .hero-copy h1 { font-size: clamp(26px, 7vw, 36px); letter-spacing: 0; overflow-wrap: break-word; text-wrap: unset; }
       .comic-label { font-size: 12px; padding: 5px 10px; }
-      .hero-copy p { font-size: 14px; line-height: 1.6; }
+      .hero-copy p { font-size: 14px; line-height: 1.6; overflow-wrap: break-word; }
       .zero-badge { font-size: 13px; flex-wrap: wrap; gap: 4px; }
       .zero-badge strong { font-size: 22px; }
       .hero-badges { gap: 6px; }
@@ -479,33 +482,38 @@
       .person-body { left: 34px; width: 112px; height: 170px; }
       .person-shirt { left: 30px; width: 52px; height: 96px; }
       .person-arm, .fist { display: none; }
-      .speech { width: 166px; right: 0; bottom: 86px; font-size: 15px; }
+      /* 吹き出し：幅を広げて自然な折り返しに */
+      .speech { width: 190px; right: 0; bottom: 86px; font-size: 14px; padding: 10px 14px; line-height: 1.5; overflow-wrap: break-word; }
       .star.s2 { right: 20px; }
       .problem-grid, .reason-grid, .flow-grid { grid-template-columns: 1fr; }
-      .problem-card h3 { font-size: 18px; }
+      .problem-card h3 { font-size: 17px; overflow-wrap: break-word; }
+      .problem-card p { font-size: 13px; }
       .section-head, .footer-top { flex-direction: column; align-items: flex-start; }
       .solution-panel, .compare-panel, .flow-panel, .company-panel { padding: 18px; }
       .solution-panel .section-title,
       .compare-panel .section-title,
       .flow-panel .section-title,
-      .company-panel .section-title { font-size: clamp(22px, 6.5vw, 34px); }
-      .burst-item { font-size: 14px; padding: 10px 12px; }
-      .reason-card h3 { font-size: 17px; }
+      .company-panel .section-title { font-size: clamp(20px, 5.8vw, 30px); text-wrap: unset; overflow-wrap: break-word; }
+      .burst-item { font-size: 14px; padding: 10px 12px; overflow-wrap: break-word; }
+      .reason-card h3 { font-size: 16px; overflow-wrap: break-word; }
       .reason-card p { font-size: 13px; }
-      .compare-cell { padding: 10px 8px; font-size: 13px; }
+      .compare-cell { padding: 10px 8px; font-size: 13px; overflow-wrap: break-word; }
       /* 料金プラン */
       .pricing-card.featured { transform: none; }
       .plan-price { font-size: 32px; padding: 16px 14px 4px; }
       .plan-price small { font-size: 12px; }
       .card-body { padding: 18px; }
-      .plan-name { font-size: 20px; }
+      .plan-name { font-size: 20px; overflow-wrap: break-word; }
+      .plan-sub { font-size: 12px; }
       .plan-ribbon { right: 12px; top: 8px; font-size: 11px; padding: 5px 10px; }
+      .pricing-body ul { font-size: 13px; }
       /* FAQ */
-      .faq-question { font-size: 13px; padding: 14px 12px; }
+      .faq-question { font-size: 13px; padding: 14px 12px; overflow-wrap: break-word; }
       .faq-answer-inner { font-size: 13px; }
       /* 会社概要 */
       .company-item { grid-template-columns: 1fr; gap: 2px; }
       .company-item span:first-child { font-size: 12px; }
+      .company-item strong { font-size: 13px; overflow-wrap: break-word; }
       /* CTAセクション */
       .cta-grid { gap: 20px; }
       .cta-card { transform: none; font-size: 14px; padding: 18px; }
@@ -514,8 +522,6 @@
       .footer-nav { gap: 12px; font-size: 13px; }
       .btn { width: 100%; }
       .btn-row { gap: 10px; }
-      /* section-lead */
-      .section-lead { font-size: 14px; }
     }
   </style>
 </head>
