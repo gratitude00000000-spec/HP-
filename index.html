@@ -449,65 +449,113 @@
       .compare-row .compare-cell:nth-child(2)::before { content: "一般的な制作会社・激安HP"; }
       .compare-row .compare-cell:nth-child(3)::before { content: "Gratitude"; }
     }
+    /* スワイプヒント：スマホのみ表示 */
+    .swipe-hint { display: none; }
     @media (max-width: 680px) {
+      .swipe-hint { display: block; text-align: center; font-size: 12px; color: var(--blue); font-weight: 800; margin: 8px 0 0; letter-spacing: .04em; }
       .pc-break { display: none; }
       .mobile-break { display: block; }
       body { line-height: 1.65; }
       .container { width: min(var(--max), calc(100% - 18px)); }
       .section { padding: 46px 0; }
-      .section-title { letter-spacing: 0; text-wrap: balance; font-size: clamp(24px, 6.5vw, 36px); }
-      /* ヘッダー：AIに選ばれるHP制作を大きく */
+      /* 文字の折り返しを自然に */
+      .section-title { letter-spacing: 0; text-wrap: unset; overflow-wrap: break-word; font-size: clamp(22px, 6vw, 32px); }
+      .section-lead { text-wrap: unset; overflow-wrap: break-word; font-size: 13px; text-align: left; margin-bottom: 18px; }
+      /* ヘッダー */
       .brand strong { font-size: 11px; font-weight: 800; opacity: 0.75; white-space: nowrap; }
       .brand span { font-size: 15px !important; color: #fff !important; font-weight: 1000; }
       /* 白い斜線・スピードラインを非表示 */
       .speed-lines { display: none; }
       .hero::before { background: repeating-radial-gradient(circle at 15% 15%, rgba(255,255,255,.18) 0 2px, transparent 2px 8px); }
-      .hero { padding: 40px 0 38px; }
-      /* 文字の折り返しを自然に：text-wrap:balanceを無効化 */
-      .section-title { text-wrap: unset; overflow-wrap: break-word; }
-      .section-lead { text-wrap: unset; overflow-wrap: break-word; font-size: 14px; text-align: left; }
-      .hero-copy h1 { font-size: clamp(26px, 7vw, 36px); letter-spacing: 0; overflow-wrap: break-word; text-wrap: unset; }
+      .hero { padding: 36px 0 32px; }
+      .hero-copy h1 { font-size: clamp(24px, 6.5vw, 34px); letter-spacing: 0; overflow-wrap: break-word; text-wrap: unset; }
       .comic-label { font-size: 12px; padding: 5px 10px; }
-      .hero-copy p { font-size: 14px; line-height: 1.6; overflow-wrap: break-word; }
-      .zero-badge { font-size: 13px; flex-wrap: wrap; gap: 4px; }
-      .zero-badge strong { font-size: 22px; }
+      .hero-copy p { font-size: 13px; line-height: 1.6; overflow-wrap: break-word; }
+      .zero-badge { font-size: 12px; flex-wrap: wrap; gap: 4px; }
+      .zero-badge strong { font-size: 20px; }
       .hero-badges { gap: 6px; }
-      .hero-badge { font-size: 12px; padding: 6px 10px; }
-      .hero-visual { min-height: auto; flex-direction: column; padding-top: 20px; }
-      .device-panel { width: 286px; left: auto; top: auto; transform: rotate(-4deg); margin: 0 auto; }
-      .comic-person { width: 176px; height: 280px; right: auto; bottom: auto; position: relative; margin: -40px auto 0; transform: scale(.92); }
-      .person-head { left: 50px; width: 84px; height: 92px; }
-      .person-eye { top: 41px; } .person-eye.left { left: 23px; } .person-eye.right { right: 23px; }
-      .person-smile { left: 26px; top: 61px; width: 34px; }
-      .person-body { left: 34px; width: 112px; height: 170px; }
-      .person-shirt { left: 30px; width: 52px; height: 96px; }
+      .hero-badge { font-size: 11px; padding: 5px 8px; }
+      /* ヒーロービジュアル：吹き出しをフロー内に配置 */
+      .hero-visual { min-height: auto; flex-direction: column; padding-top: 16px; align-items: center; }
+      .device-panel { width: 272px; left: auto; top: auto; transform: rotate(-3deg); margin: 0 auto; }
+      .speech { position: relative; right: auto; bottom: auto; width: auto; max-width: 240px; margin: 14px auto 0; font-size: 13px; padding: 10px 14px; line-height: 1.5; transform: rotate(-2deg); }
+      .speech::after { display: none; }
+      .comic-person { width: 160px; height: 260px; right: auto; bottom: auto; position: relative; margin: -20px auto 0; transform: scale(.92); }
+      .person-head { left: 46px; width: 76px; height: 84px; }
+      .person-eye { top: 37px; } .person-eye.left { left: 20px; } .person-eye.right { right: 20px; }
+      .person-smile { left: 23px; top: 56px; width: 32px; }
+      .person-body { left: 30px; width: 104px; height: 158px; }
+      .person-shirt { left: 28px; width: 48px; height: 88px; }
       .person-arm, .fist { display: none; }
-      /* 吹き出し：幅を広げて自然な折り返しに */
-      .speech { width: 190px; right: 0; bottom: 86px; font-size: 14px; padding: 10px 14px; line-height: 1.5; overflow-wrap: break-word; }
-      .star.s2 { right: 20px; }
-      .problem-grid, .reason-grid, .flow-grid { grid-template-columns: 1fr; }
-      .problem-card h3 { font-size: 17px; overflow-wrap: break-word; }
+      .star.s1 { display: none; } .star.s2 { right: 10px; font-size: 28px; }
+      /* 問題カード */
+      .problem-grid { grid-template-columns: 1fr; }
+      .problem-card h3 { font-size: 16px; overflow-wrap: break-word; }
       .problem-card p { font-size: 13px; }
-      .section-head, .footer-top { flex-direction: column; align-items: flex-start; }
-      .solution-panel, .compare-panel, .flow-panel, .company-panel { padding: 18px; }
+      /* パネル系 */
+      .solution-panel, .compare-panel, .flow-panel, .company-panel { padding: 18px; overflow: visible; }
       .solution-panel .section-title,
       .compare-panel .section-title,
       .flow-panel .section-title,
-      .company-panel .section-title { font-size: clamp(20px, 5.8vw, 30px); text-wrap: unset; overflow-wrap: break-word; }
-      .burst-item { font-size: 14px; padding: 10px 12px; overflow-wrap: break-word; }
+      .company-panel .section-title { font-size: clamp(19px, 5.5vw, 28px); text-wrap: unset; overflow-wrap: break-word; }
+      .burst-item { font-size: 13px; padding: 10px 12px; overflow-wrap: break-word; }
+      /* 理由カード（reasons） */
+      .reason-grid { grid-template-columns: 1fr; }
       .reason-card h3 { font-size: 16px; overflow-wrap: break-word; }
       .reason-card p { font-size: 13px; }
-      .compare-cell { padding: 10px 8px; font-size: 13px; overflow-wrap: break-word; }
+      /* HOW IT WORKS：横スライド */
+      #ai-seo .reason-grid {
+        display: flex !important;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 10px;
+        gap: 12px;
+      }
+      #ai-seo .reason-grid::-webkit-scrollbar { display: none; }
+      #ai-seo .reason-card { flex: 0 0 80%; min-width: 0; scroll-snap-align: start; }
+      /* 契約の流れ：横スライド */
+      .flow-grid {
+        display: flex !important;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 10px;
+        gap: 12px;
+        grid-template-columns: unset !important;
+      }
+      .flow-grid::-webkit-scrollbar { display: none; }
+      .flow-step { flex: 0 0 78%; min-width: 0; scroll-snap-align: start; }
+      /* 比較テーブル：横スクロール */
+      .compare-panel { overflow: visible; }
+      .h-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 10px;
+      }
+      .h-scroll::-webkit-scrollbar { display: none; }
+      .h-scroll .compare-table { min-width: 560px; border-radius: 14px; }
+      .h-scroll .compare-row { grid-template-columns: 110px 1fr 1fr !important; display: grid !important; }
+      .h-scroll .compare-head { display: grid !important; }
+      .h-scroll .compare-cell { border-right: 3px solid var(--line) !important; border-bottom: 0 !important; font-size: 12px; padding: 10px 8px; }
+      .h-scroll .compare-row:not(:last-child) { border-bottom: 3px solid var(--line); }
+      .h-scroll .compare-cell:last-child { border-right: 0 !important; }
+      .h-scroll .compare-cell::before { display: none !important; }
       /* 料金プラン */
+      .pricing-grid { grid-template-columns: 1fr; }
       .pricing-card.featured { transform: none; }
-      .plan-price { font-size: 32px; padding: 16px 14px 4px; }
+      .plan-price { font-size: 30px; padding: 16px 14px 4px; }
       .plan-price small { font-size: 12px; }
-      .card-body { padding: 18px; }
-      .plan-name { font-size: 20px; overflow-wrap: break-word; }
+      .card-body { padding: 16px; }
+      .plan-name { font-size: 19px; overflow-wrap: break-word; }
       .plan-sub { font-size: 12px; }
       .plan-ribbon { right: 12px; top: 8px; font-size: 11px; padding: 5px 10px; }
       .pricing-body ul { font-size: 13px; }
       /* FAQ */
+      .faq-wrap { grid-template-columns: 1fr; }
       .faq-question { font-size: 13px; padding: 14px 12px; overflow-wrap: break-word; }
       .faq-answer-inner { font-size: 13px; }
       /* 会社概要 */
@@ -518,6 +566,7 @@
       .cta-grid { gap: 20px; }
       .cta-card { transform: none; font-size: 14px; padding: 18px; }
       .speech-small { font-size: 14px; padding: 10px 14px; }
+      .section-head, .footer-top { flex-direction: column; align-items: flex-start; }
       /* フッター */
       .footer-nav { gap: 12px; font-size: 13px; }
       .btn { width: 100%; }
@@ -653,6 +702,7 @@
               <article class="reason-card"><div class="reason-icon">AI</div><h3>AIO / LLMO / AEO</h3><p>AI検索やAI回答でおすすめされやすくする考え方です。会社情報・強み・サービス内容をAIに伝わりやすく設計します。</p></article>
               <article class="reason-card"><div class="reason-icon">導</div><h3>導線設計</h3><p>HPを見た人が迷わず問い合わせ・予約・応募に進めるように、ボタン・文章・ページ構成を整えます。</p></article>
             </div>
+            <p class="swipe-hint">◀ スワイプして見る ▶</p>
           </div>
         </div>
       </div>
@@ -667,14 +717,17 @@
               <h2 class="section-title">格安HP・ノーコード制作との<span class="blue">違い</span></h2>
               <p class="section-lead">今は誰でもHPが作れる時代です。でも「作れること」と「集客できること」は別問題です。</p>
             </div>
-            <div class="compare-table">
-              <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">格安HP・ノーコード制作</div><div class="compare-cell">Gratitude</div></div>
-              <div class="compare-row"><div class="compare-cell">作り方</div><div class="compare-cell compare-bad">テンプレにはめるだけになりやすい</div><div class="compare-cell compare-good">業種・目的・導線から設計</div></div>
-              <div class="compare-row"><div class="compare-cell">目的</div><div class="compare-cell compare-bad">見た目を整えることが中心</div><div class="compare-cell compare-good">問い合わせ・予約・応募につなげる</div></div>
-              <div class="compare-row"><div class="compare-cell">SEO / MEO</div><div class="compare-cell compare-bad">ほぼ未対応、または別料金</div><div class="compare-cell compare-good">最初から検索導線を意識</div></div>
-              <div class="compare-row"><div class="compare-cell">AI検索</div><div class="compare-cell compare-bad">対応していないことが多い</div><div class="compare-cell compare-good">AIに伝わる情報設計を意識</div></div>
-              <div class="compare-row"><div class="compare-cell">公開後</div><div class="compare-cell compare-bad">作って終わり・放置されがち</div><div class="compare-cell compare-good">管理・相談・改善までサポート</div></div>
+            <div class="h-scroll">
+              <div class="compare-table">
+                <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">格安HP・ノーコード制作</div><div class="compare-cell">Gratitude</div></div>
+                <div class="compare-row"><div class="compare-cell">作り方</div><div class="compare-cell compare-bad">テンプレにはめるだけになりやすい</div><div class="compare-cell compare-good">業種・目的・導線から設計</div></div>
+                <div class="compare-row"><div class="compare-cell">目的</div><div class="compare-cell compare-bad">見た目を整えることが中心</div><div class="compare-cell compare-good">問い合わせ・予約・応募につなげる</div></div>
+                <div class="compare-row"><div class="compare-cell">SEO / MEO</div><div class="compare-cell compare-bad">ほぼ未対応、または別料金</div><div class="compare-cell compare-good">最初から検索導線を意識</div></div>
+                <div class="compare-row"><div class="compare-cell">AI検索</div><div class="compare-cell compare-bad">対応していないことが多い</div><div class="compare-cell compare-good">AIに伝わる情報設計を意識</div></div>
+                <div class="compare-row"><div class="compare-cell">公開後</div><div class="compare-cell compare-bad">作って終わり・放置されがち</div><div class="compare-cell compare-good">管理・相談・改善までサポート</div></div>
+              </div>
             </div>
+            <p class="swipe-hint">◀ スワイプして比較 ▶</p>
           </div>
         </div>
       </div>
@@ -689,17 +742,20 @@
               <h2 class="section-title">他社比較でわかる、<span class="blue">価格と内容の違い</span></h2>
               <p class="section-lead">一般的な制作会社・激安HP制作と比較しても、初期費用0円・AI/MEO対応・公開後サポートが強みです。</p>
             </div>
-            <div class="compare-table">
-              <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">一般的な制作会社 / 激安HP</div><div class="compare-cell">Gratitude</div></div>
-              <div class="compare-row"><div class="compare-cell">初期制作費</div><div class="compare-cell compare-bad">10万円〜50万円以上 / 激安でも別途費用あり</div><div class="compare-cell compare-good">0円から開始可能</div></div>
-              <div class="compare-row"><div class="compare-cell">月額費用</div><div class="compare-cell compare-bad">内容次第で高額 / 管理だけで内容が薄い</div><div class="compare-cell compare-good">月額7,980円〜（税抜）</div></div>
-              <div class="compare-row"><div class="compare-cell">同等内容の料金感</div><div class="compare-cell compare-bad">当社比で約3倍になるケースも</div><div class="compare-cell compare-good">制作・管理・集客導線まで込み</div></div>
-              <div class="compare-row"><div class="compare-cell">SEO / MEO</div><div class="compare-cell compare-bad">別料金、または未対応が多い</div><div class="compare-cell compare-good">基本設計に含める</div></div>
-              <div class="compare-row"><div class="compare-cell">AI検索対策</div><div class="compare-cell compare-bad">未対応が多い</div><div class="compare-cell compare-good">AIO / LLMO / AEOを意識</div></div>
-              <div class="compare-row"><div class="compare-cell">公開スピード</div><div class="compare-cell compare-bad">数週間〜数ヶ月</div><div class="compare-cell compare-good">最短1週間で公開可能</div></div>
-              <div class="compare-row"><div class="compare-cell">契約期間</div><div class="compare-cell compare-bad">6年縛り、短くても2年縛りが多い</div><div class="compare-cell compare-good">1年契約で始めやすい</div></div>
-              <div class="compare-row"><div class="compare-cell">公開後サポート</div><div class="compare-cell compare-bad">作って終わり / 更新は別料金</div><div class="compare-cell compare-good">管理・相談まで対応</div></div>
+            <div class="h-scroll">
+              <div class="compare-table">
+                <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">一般的な制作会社 / 激安HP</div><div class="compare-cell">Gratitude</div></div>
+                <div class="compare-row"><div class="compare-cell">初期制作費</div><div class="compare-cell compare-bad">10万円〜50万円以上 / 激安でも別途費用あり</div><div class="compare-cell compare-good">0円から開始可能</div></div>
+                <div class="compare-row"><div class="compare-cell">月額費用</div><div class="compare-cell compare-bad">内容次第で高額 / 管理だけで内容が薄い</div><div class="compare-cell compare-good">月額7,980円〜（税抜）</div></div>
+                <div class="compare-row"><div class="compare-cell">同等内容の料金感</div><div class="compare-cell compare-bad">当社比で約3倍になるケースも</div><div class="compare-cell compare-good">制作・管理・集客導線まで込み</div></div>
+                <div class="compare-row"><div class="compare-cell">SEO / MEO</div><div class="compare-cell compare-bad">別料金、または未対応が多い</div><div class="compare-cell compare-good">基本設計に含める</div></div>
+                <div class="compare-row"><div class="compare-cell">AI検索対策</div><div class="compare-cell compare-bad">未対応が多い</div><div class="compare-cell compare-good">AIO / LLMO / AEOを意識</div></div>
+                <div class="compare-row"><div class="compare-cell">公開スピード</div><div class="compare-cell compare-bad">数週間〜数ヶ月</div><div class="compare-cell compare-good">最短1週間で公開可能</div></div>
+                <div class="compare-row"><div class="compare-cell">契約期間</div><div class="compare-cell compare-bad">6年縛り、短くても2年縛りが多い</div><div class="compare-cell compare-good">1年契約で始めやすい</div></div>
+                <div class="compare-row"><div class="compare-cell">公開後サポート</div><div class="compare-cell compare-bad">作って終わり / 更新は別料金</div><div class="compare-cell compare-good">管理・相談まで対応</div></div>
+              </div>
             </div>
+            <p class="swipe-hint">◀ スワイプして比較 ▶</p>
           </div>
         </div>
       </div>
@@ -720,6 +776,7 @@
               <div class="flow-step"><div class="step-tag">カンタン STEP 03</div><div class="flow-icon">💻</div><strong>制作開始</strong><br><small>デザイン・文章作成</small></div>
               <div class="flow-step"><div class="step-tag">カンタン STEP 04</div><div class="flow-icon">🚀</div><strong>最短1週間で公開</strong><br><small>公開後サポート開始</small></div>
             </div>
+            <p class="swipe-hint">◀ スワイプして見る ▶</p>
           </div>
         </div>
       </div>
