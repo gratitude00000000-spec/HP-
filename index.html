@@ -88,15 +88,19 @@
     /* solutionパネル左列のtitleは左寄せ */
     .solution-inner > div > .section-title { text-align: left; }
     /* solutionパネル左列のsection-leadは左寄せ */
-    .solution-inner > div > .section-lead { text-align: left; }
+    .solution-inner > div > .section-lead { text-align: left; margin-left: 0; max-width: none; }
+    .company-panel .section-lead { text-align: left; margin-left: 0; max-width: none; }
     .section-title .blue { color: var(--blue); }
     .section-lead {
       margin: 0 auto 30px;
-      max-width: 780px;
+      max-width: 640px;
       color: var(--muted);
       font-weight: 800;
       text-align: center;
       text-wrap: balance;
+      line-height: 1.75;
+      letter-spacing: 0.01em;
+      font-size: 15px;
     }
     .comic-label {
       display: inline-flex;
@@ -549,7 +553,7 @@
       .section { padding: 46px 0; }
       .section-title { letter-spacing: 0; }
       .solution-inner > div > .section-title { text-align: left; }
-      .section-lead { text-align: left; text-wrap: balance; }
+      .section-lead { text-align: left; text-wrap: balance; font-size: 14px; }
       .brand strong { font-size: 17px; }
       .hero { padding: 40px 0 38px; }
       .hero-copy h1 { font-size: clamp(22px, 5.8vw, 30px); letter-spacing: 0; word-break: keep-all; overflow-wrap: break-word; }
@@ -573,7 +577,7 @@
       .problem-card h3 { font-size: 15px; line-height: 1.3; }
       .problem-card p { font-size: 12px; }
       .problem-card .card-body { padding: 14px 12px; }
-      .thumb { min-height: 100px; }
+      .thumb { min-height: 136px; }
       .thumb-q { font-size: 11px; padding: 0 16px; }
       .thumb::after { font-size: 38px; right: 10px; top: 10px; }
       .num { width: 34px; height: 34px; font-size: 13px; }
@@ -682,7 +686,7 @@
             <div>
               <div class="comic-label">SOLUTION!</div>
               <h2 class="section-title">Gratitudeは、<br><span class="blue">AIに選ばれる導線</span>から<br>HPを作ります！</h2>
-              <p class="section-lead" style="margin-left:0;max-width:none;">Googleマップ・Google検索・AI検索からの流入を、問い合わせや予約に変えるための導線を設計します。簡易的な「見せるHP」のみの作成も可能です。</p>
+              <p class="section-lead">Googleマップ・Google検索・AI検索からの流入を、問い合わせや予約に変えるための導線を設計します。簡易的な「見せるHP」のみの作成も可能です。</p>
             </div>
             <div class="burst-list">
               <div class="burst-item">初期制作費0円で<br>始めやすい！</div>
@@ -819,7 +823,7 @@
 
     <section class="section comic-strip" id="faq">
       <div class="container">
-        <div class="section-head fade-up"><div><div class="comic-label">FAQ!</div><h2 class="section-title">よくある質問</h2><p class="section-lead" style="margin:0;max-width:760px;">導入前に気になりやすい点をまとめています。</p></div></div>
+        <div class="section-head fade-up"><div><div class="comic-label">FAQ!</div><h2 class="section-title">よくある質問</h2><p class="section-lead" style="margin-bottom:0;">導入前に気になりやすい点をまとめています。</p></div></div>
         <div class="faq-wrap">
           <div class="faq-item fade-up"><button class="faq-question">本当に初期制作費は0円ですか？ <span class="faq-icon">＋</span></button><div class="faq-answer"><div class="faq-answer-inner">基本プランでは初期制作費を抑え、月額制で始められる形を想定しています。特殊な機能や大規模構成の場合は別途ご相談となります。</div></div></div>
           <div class="faq-item fade-up"><button class="faq-question">SEOやMEOの効果はどのくらいで出ますか？ <span class="faq-icon">＋</span></button><div class="faq-answer"><div class="faq-answer-inner">業種や競合状況によって差があります。まずは検索されやすく、問い合わせにつながりやすい構造を整えることを重視します。</div></div></div>
@@ -836,7 +840,7 @@
             <div>
               <div class="comic-label">COMPANY!</div>
               <h2 class="section-title">会社概要</h2>
-              <p class="section-lead" style="margin-left:0;max-width:none;">株式会社Gratitudeは、店舗運営・集客支援・Webマーケティングを行っています。現場目線を活かし、集客につながるホームページ制作をご提案します。</p>
+              <p class="section-lead">株式会社Gratitudeは、店舗運営・集客支援・Webマーケティングを行っています。現場目線を活かし、集客につながるホームページ制作をご提案します。</p>
             </div>
             <div class="company-list">
               <div class="company-item"><span>会社名</span><strong>株式会社Gratitude</strong></div>
