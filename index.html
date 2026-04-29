@@ -402,6 +402,7 @@
     .pricing-head { background: var(--blue); color: #fff; padding: 42px 20px 16px; border-bottom: 5px solid var(--line); text-align: center; }
     .pricing-card:not(.featured) .pricing-head { padding-top: 28px; }
     .plan-name { margin: 0; font-size: 25px; font-weight: 1000; line-height: 1.2; }
+    .pricing-card.featured .plan-name { color: var(--yellow); text-shadow: 2px 2px 0 rgba(0,0,0,.22); }
     .plan-sub { font-size: 13px; opacity: .9; font-weight: 900; margin-top: 6px; }
     .plan-price { text-align: center; padding: 24px 18px 4px; font-size: 44px; font-weight: 1000; line-height: 1.08; }
     .plan-price small { font-size: 14px; font-weight: 900; color: var(--muted); }
@@ -425,9 +426,29 @@
 
     .cta-band { color: #fff; background: radial-gradient(circle at 85% 20%, rgba(255,210,31,.3), transparent 18%), linear-gradient(135deg, #05469d, #0877f2 54%, #05265f); border-top: 6px solid var(--line); border-bottom: 6px solid var(--line); overflow: hidden; }
     .cta-band::before { content: ""; position: absolute; inset: 0; background: repeating-radial-gradient(circle, rgba(255,255,255,.18) 0 2px, transparent 2px 9px); opacity: .35; }
-    .cta-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.08fr .92fr; gap: 28px; align-items: center; }
-    .cta-card { background: #fff; color: var(--ink); border: 5px solid var(--line); border-radius: 22px; padding: 24px; box-shadow: 10px 10px 0 rgba(0,0,0,.2); transform: rotate(1deg); font-weight: 900; }
+    .cta-inner { position: relative; z-index: 1; }
+    .cta-header { margin-bottom: 32px; }
     .speech-small { display: inline-block; background: var(--yellow); color: var(--ink); border: 4px solid var(--line); border-radius: 22px; padding: 12px 18px; font-weight: 1000; margin-bottom: 14px; transform: rotate(-2deg); }
+    /* Contact Form */
+    .contact-form-wrap { max-width: 700px; margin: 0 auto; background: rgba(3,21,59,.62); border: 2px solid rgba(255,255,255,.18); border-radius: 24px; padding: 36px; }
+    .form-heading { text-align: center; color: rgba(255,255,255,.7); font-weight: 1000; font-size: 15px; margin: 0 0 24px; letter-spacing: .04em; }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; color: rgba(255,255,255,.92); font-weight: 1000; margin-bottom: 8px; font-size: 15px; }
+    .req-badge { background: #e53935; color: #fff; font-size: 11px; font-weight: 1000; padding: 2px 7px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+    .radio-wrap { display: grid; gap: 8px; }
+    .radio-label { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.07); border: 2px solid rgba(255,255,255,.2); border-radius: 12px; padding: 14px 16px; color: rgba(255,255,255,.9); font-weight: 800; cursor: pointer; transition: border-color .15s; }
+    .radio-label:hover { border-color: var(--yellow); }
+    .radio-label input[type="radio"] { accent-color: var(--yellow); width: 18px; height: 18px; flex-shrink: 0; }
+    .contact-form-wrap input[type="text"],
+    .contact-form-wrap input[type="email"],
+    .contact-form-wrap textarea { width: 100%; box-sizing: border-box; background: rgba(255,255,255,.07); border: 2px solid rgba(255,255,255,.2); border-radius: 12px; padding: 14px 16px; color: rgba(255,255,255,.9); font-size: 15px; font-family: inherit; font-weight: 800; outline: none; transition: border-color .15s; }
+    .contact-form-wrap input:focus, .contact-form-wrap textarea:focus { border-color: var(--yellow); }
+    .contact-form-wrap input::placeholder, .contact-form-wrap textarea::placeholder { color: rgba(255,255,255,.32); }
+    .contact-form-wrap textarea { height: 120px; resize: vertical; }
+    .btn-submit-form { display: block; width: 100%; padding: 18px; background: linear-gradient(135deg, #1a6ef5, #6c5ce7); color: #fff; border: none; border-radius: 14px; font-size: 18px; font-weight: 1000; font-family: inherit; cursor: pointer; margin-top: 8px; transition: opacity .18s; }
+    .btn-submit-form:hover { opacity: .88; }
+    .form-phone-note { text-align: center; color: rgba(255,255,255,.5); font-size: 14px; margin: 16px 0 0; font-weight: 800; }
+    .form-phone-note a { color: var(--yellow); font-weight: 1000; }
 
     .site-footer { background: var(--navy); color: rgba(255,255,255,.86); padding: 26px 0 38px; }
     .footer-top { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,.16); margin-bottom: 18px; }
@@ -449,7 +470,7 @@
       .menu-toggle { display: inline-grid; place-items: center; }
       .site-header.open .nav { display: flex; position: absolute; left: 14px; right: 14px; top: 80px; background: rgba(3,21,59,.98); border: 4px solid #fff; border-radius: 18px; padding: 18px; flex-direction: column; align-items: flex-start; gap: 16px; }
       .site-header.open .header-cta { display: flex; position: absolute; left: 14px; right: 14px; top: 316px; background: rgba(3,21,59,.98); border: 4px solid #fff; border-radius: 18px; padding: 16px; flex-direction: column; align-items: stretch; }
-      .pricing-grid, .faq-wrap { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
       .flow-grid { grid-template-columns: repeat(2, 1fr); }
       .flow-step:not(:last-child)::after { display: none; }
       .compare-row { grid-template-columns: 1fr; }
@@ -593,7 +614,6 @@
           <div class="btn-row">
             <a class="btn btn-primary" href="#contact">まずは話だけ聞いてみる</a>
             <a class="btn btn-dark" href="#contact">今のHPを診断する</a>
-            <a class="btn btn-white" href="#contact">料金だけ聞いてみる</a>
           </div>
           <div class="zero-badge">通常かかる制作費が <strong>0円</strong> 月額だけで開始OK</div>
           <div class="hero-badges">
@@ -782,10 +802,7 @@
         <div class="section-head fade-up"><div><div class="comic-label">FAQ!</div><h2 class="section-title">よくある質問</h2><p class="section-lead" style="margin:0;max-width:760px;">導入前に気になりやすい点をまとめています。</p></div></div>
         <div class="faq-wrap">
           <div class="faq-item fade-up"><button class="faq-question">本当に初期制作費は0円ですか？ <span class="faq-icon">＋</span></button><div class="faq-answer"><div class="faq-answer-inner">基本プランでは初期制作費を抑え、月額制で始められる形を想定しています。特殊な機能や大規模構成の場合は別途ご相談となります。</div></div></div>
-          <div class="faq-item fade-up"><button class="faq-question">制作期間はどのくらいですか？ <span class="faq-icon">＋</span></button><div class="faq-answer"><div class="faq-answer-inner">内容や素材状況によりますが、シンプルな構成であれば最短1週間、通常2〜4週間程度が目安です。</div></div></div>
-          <div class="faq-item fade-up"><button class="faq-question">HPだけの依頼でも大丈夫ですか？ <span class="faq-icon">＋</span></button><div class="faq-answer"><div class="faq-answer-inner">はい。GBP運用やMEO代行とは分けて、HP制作・管理のみのご相談も可能です。簡易的な「見せるHP」のみも対応できます。</div></div></div>
           <div class="faq-item fade-up"><button class="faq-question">SEOやMEOの効果はどのくらいで出ますか？ <span class="faq-icon">＋</span></button><div class="faq-answer"><div class="faq-answer-inner">業種や競合状況によって差があります。まずは検索されやすく、問い合わせにつながりやすい構造を整えることを重視します。</div></div></div>
-          <div class="faq-item fade-up"><button class="faq-question">自分で更新することはできますか？ <span class="faq-icon">＋</span></button><div class="faq-answer"><div class="faq-answer-inner">はい、可能です。更新しやすい構成を前提に設計し、必要に応じて運用代行もご提案できます。</div></div></div>
           <div class="faq-item fade-up"><button class="faq-question">なぜ他社より安くできますか？ <span class="faq-icon">＋</span></button><div class="faq-answer"><div class="faq-answer-inner">社内で設計・文章作成・制作・運用まで一貫して行い、さらにAIを活用して制作効率を高めているためです。外注や分業にかかる余分なコストを抑えながら、品質を落とさない制作体制を整えています。</div></div></div>
           <div class="faq-item fade-up"><button class="faq-question">契約期間はどのくらいですか？ <span class="faq-icon">＋</span></button><div class="faq-answer"><div class="faq-answer-inner">基本は1年契約を想定しています。一般的な6年縛りや2年縛りよりも始めやすく、事前に条件を明確にしたうえでご案内します。</div></div></div>
         </div>
@@ -815,9 +832,42 @@
     </section>
 
     <section class="section cta-band" id="contact">
-      <div class="container cta-grid">
-        <div class="fade-up"><div class="speech-small">話だけでもOK！</div><h2 class="section-title" style="color:#fff;text-shadow:4px 4px 0 var(--navy);">AIに選ばれるHP、<br>まずは気軽に<br>相談しませんか？</h2><p class="section-lead" style="margin-left:0;color:#fff;max-width:680px;text-align:left;">まだ検討中でもOKです。まずは料金だけでもお気軽にご確認ください。業種や現状に合わせて、最適な導線設計をご提案します。</p><div class="btn-row"><a class="btn btn-primary" href="mailto:info@example.com">まずは話だけ聞いてみる</a><a class="btn btn-dark" href="tel:0989755682">電話で相談する</a><a class="btn btn-white" href="mailto:info@example.com">料金だけ聞いてみる</a></div></div>
-        <div class="cta-card fade-up"><strong style="display:block;font-size:24px;margin-bottom:10px;word-break:normal;">初期制作費0円で始めやすい！</strong><p style="margin:0;word-break:normal;">SEO・MEO・AI検索・導線設計までを見据えた、成果重視のホームページ制作をご提案します。</p></div>
+      <div class="container cta-inner">
+        <div class="center cta-header fade-up">
+          <div class="speech-small">話だけでもOK！</div>
+          <h2 class="section-title" style="color:#fff;text-shadow:4px 4px 0 var(--navy);">AIに選ばれるHP、<br>まずは気軽に<br>相談しませんか？</h2>
+          <p style="color:rgba(255,255,255,.9);font-weight:800;max-width:560px;margin:0 auto;">まだ検討中でもOKです。業種や現状に合わせて、最適な導線設計をご提案します。</p>
+        </div>
+        <div class="contact-form-wrap fade-up">
+          <p class="form-heading">まずはお気軽にご連絡ください</p>
+          <form action="https://formsubmit.co/gratitude.00000000@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="【GratitudeHP】無料相談のお申し込みがありました">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://hp.ai-marketing-japan.jp/#contact">
+            <div class="form-group">
+              <label class="form-label">現在のご状況に近いものをお選びください <span class="req-badge">必須</span></label>
+              <div class="radio-wrap">
+                <label class="radio-label"><input type="radio" name="situation" value="AIを活用した集客に興味がある" required> AIを活用した集客に興味がある</label>
+                <label class="radio-label"><input type="radio" name="situation" value="他社サービスと比較・検討している"> 他社サービスと比較・検討している</label>
+                <label class="radio-label"><input type="radio" name="situation" value="自社に合うか相談・提案を受けたい"> 自社に合うか相談・提案を受けたい</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">お名前 <span class="req-badge">必須</span></label>
+              <input type="text" name="name" placeholder="山田 太郎" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">メールアドレス <span class="req-badge">必須</span></label>
+              <input type="email" name="email" placeholder="example@gmail.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ご相談内容</label>
+              <textarea name="message" placeholder="お気軽にご記入ください"></textarea>
+            </div>
+            <button type="submit" class="btn-submit-form">無料相談を申し込む →</button>
+          </form>
+          <p class="form-phone-note">またはお電話でもどうぞ　<a href="tel:0989755682">098-975-5682</a></p>
+        </div>
       </div>
     </section>
   </main>
