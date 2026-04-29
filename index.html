@@ -46,6 +46,18 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    /* 日本語テキスト：単語途中での改行を禁止 */
+    h1, h2, h3, h4, p, li, button, label,
+    .btn, .burst-item, .compare-cell, .step-tag,
+    .plan-name, .plan-sub, .plan-price,
+    .company-item, .faq-question, .faq-answer-inner,
+    .section-lead, .section-title, .hero-badge, .zero-badge {
+      word-break: keep-all;
+      overflow-wrap: normal;
+      line-break: strict;
+    }
+    /* 長い英数字・URL用 */
+    .break-any { overflow-wrap: anywhere; }
     body {
       margin: 0;
       color: var(--ink);
@@ -459,8 +471,8 @@
       .container { width: min(var(--max), calc(100% - 18px)); }
       .section { padding: 46px 0; }
       /* 文字の折り返しを自然に */
-      .section-title { letter-spacing: 0; text-wrap: unset; overflow-wrap: break-word; font-size: clamp(22px, 6vw, 32px); }
-      .section-lead { text-wrap: unset; overflow-wrap: break-word; font-size: 13px; text-align: left; margin-bottom: 18px; }
+      .section-title { letter-spacing: 0; text-wrap: unset; overflow-wrap: normal;font-size: clamp(22px, 6vw, 32px); }
+      .section-lead { text-wrap: unset; overflow-wrap: normal;font-size: 13px; text-align: left; margin-bottom: 18px; }
       /* ヘッダー */
       .brand strong { font-size: 11px; font-weight: 800; opacity: 0.75; white-space: nowrap; }
       .brand span { font-size: 15px !important; color: #fff !important; font-weight: 1000; }
@@ -468,9 +480,9 @@
       .speed-lines { display: none; }
       .hero::before { background: repeating-radial-gradient(circle at 15% 15%, rgba(255,255,255,.18) 0 2px, transparent 2px 8px); }
       .hero { padding: 36px 0 32px; }
-      .hero-copy h1 { font-size: clamp(24px, 6.5vw, 34px); letter-spacing: 0; overflow-wrap: break-word; text-wrap: unset; }
+      .hero-copy h1 { font-size: clamp(24px, 6.5vw, 34px); letter-spacing: 0; overflow-wrap: normal;text-wrap: unset; }
       .comic-label { font-size: 12px; padding: 5px 10px; }
-      .hero-copy p { font-size: 13px; line-height: 1.6; overflow-wrap: break-word; }
+      .hero-copy p { font-size: 13px; line-height: 1.6; overflow-wrap: normal;}
       .zero-badge { font-size: 12px; flex-wrap: wrap; gap: 4px; }
       .zero-badge strong { font-size: 20px; }
       .hero-badges { gap: 6px; }
@@ -490,18 +502,18 @@
       .star.s1 { display: none; } .star.s2 { right: 10px; font-size: 28px; }
       /* 問題カード */
       .problem-grid { grid-template-columns: 1fr; }
-      .problem-card h3 { font-size: 16px; overflow-wrap: break-word; }
+      .problem-card h3 { font-size: 16px; overflow-wrap: normal;}
       .problem-card p { font-size: 13px; }
       /* パネル系 */
       .solution-panel, .compare-panel, .flow-panel, .company-panel { padding: 18px; overflow: visible; }
       .solution-panel .section-title,
       .compare-panel .section-title,
       .flow-panel .section-title,
-      .company-panel .section-title { font-size: clamp(19px, 5.5vw, 28px); text-wrap: unset; overflow-wrap: break-word; }
-      .burst-item { font-size: 13px; padding: 10px 12px; overflow-wrap: break-word; }
+      .company-panel .section-title { font-size: clamp(19px, 5.5vw, 28px); text-wrap: unset; overflow-wrap: normal;}
+      .burst-item { font-size: 13px; padding: 10px 12px; overflow-wrap: normal;}
       /* 理由カード（reasons） */
       .reason-grid { grid-template-columns: 1fr; }
-      .reason-card h3 { font-size: 16px; overflow-wrap: break-word; }
+      .reason-card h3 { font-size: 16px; overflow-wrap: normal;}
       .reason-card p { font-size: 13px; }
       /* HOW IT WORKS：横スライド */
       #ai-seo .reason-grid {
@@ -550,18 +562,18 @@
       .plan-price { font-size: 30px; padding: 16px 14px 4px; }
       .plan-price small { font-size: 12px; }
       .card-body { padding: 16px; }
-      .plan-name { font-size: 19px; overflow-wrap: break-word; }
+      .plan-name { font-size: 19px; overflow-wrap: normal;}
       .plan-sub { font-size: 12px; }
       .plan-ribbon { right: 12px; top: 8px; font-size: 11px; padding: 5px 10px; }
       .pricing-body ul { font-size: 13px; }
       /* FAQ */
       .faq-wrap { grid-template-columns: 1fr; }
-      .faq-question { font-size: 13px; padding: 14px 12px; overflow-wrap: break-word; }
+      .faq-question { font-size: 13px; padding: 14px 12px; overflow-wrap: normal;}
       .faq-answer-inner { font-size: 13px; }
       /* 会社概要 */
       .company-item { grid-template-columns: 1fr; gap: 2px; }
       .company-item span:first-child { font-size: 12px; }
-      .company-item strong { font-size: 13px; overflow-wrap: break-word; }
+      .company-item strong { font-size: 13px; overflow-wrap: normal;}
       /* CTAセクション */
       .cta-grid { gap: 20px; }
       .cta-card { transform: none; font-size: 14px; padding: 18px; }
@@ -661,10 +673,10 @@
               <p class="section-lead" style="margin-left:0;max-width:none;">Googleマップ・Google検索・AI検索からの流入を、問い合わせや予約に変えるための導線を設計します。簡易的な「見せるHP」のみの作成も可能です。</p>
             </div>
             <div class="burst-list">
-              <div class="burst-item">初期制作費0円で始めやすい</div>
-              <div class="burst-item">AIO・LLMO・AEOに対応した情報設計</div>
-              <div class="burst-item">SEO・MEOを意識したページ構成</div>
-              <div class="burst-item">公開後の管理サポートも手厚い</div>
+              <div class="burst-item">初期制作費0円で<br>始めやすい</div>
+              <div class="burst-item">AIO・LLMO・AEOに<br>対応した情報設計</div>
+              <div class="burst-item">SEO・MEOを意識した<br>ページ構成</div>
+              <div class="burst-item">公開後の管理サポートも<br>手厚い</div>
             </div>
           </div>
         </div>
@@ -693,7 +705,7 @@
           <div class="panel-inner">
             <div class="center">
               <div class="comic-label">HOW IT WORKS!</div>
-              <h2 class="section-title">集客の仕組みを、<span class="blue">わかりやすく</span>説明します！</h2>
+              <h2 class="section-title">集客の仕組みを、<br><span class="blue">わかりやすく</span>説明します！</h2>
               <p class="section-lead">HP制作で大切なのは、作ることではなく“見つけられて、選ばれること”。SEO・MEO・AI対策を難しい言葉ではなく、集客の流れとして設計します。</p>
             </div>
             <div class="grid reason-grid">
@@ -714,7 +726,7 @@
           <div class="panel-inner">
             <div class="center">
               <div class="comic-label">DIFFERENCE!</div>
-              <h2 class="section-title">格安HP・ノーコード制作との<span class="blue">違い</span></h2>
+              <h2 class="section-title">格安HP・<br>ノーコード制作との<span class="blue">違い</span></h2>
               <p class="section-lead">今は誰でもHPが作れる時代です。でも「作れること」と「集客できること」は別問題です。</p>
             </div>
             <div class="h-scroll">
@@ -739,7 +751,7 @@
           <div class="panel-inner">
             <div class="center">
               <div class="comic-label">COMPARE!</div>
-              <h2 class="section-title">他社比較でわかる、<span class="blue">価格と内容の違い</span></h2>
+              <h2 class="section-title">他社比較でわかる、<br><span class="blue">価格と内容の違い</span></h2>
               <p class="section-lead">一般的な制作会社・激安HP制作と比較しても、初期費用0円・AI/MEO対応・公開後サポートが強みです。</p>
             </div>
             <div class="h-scroll">
