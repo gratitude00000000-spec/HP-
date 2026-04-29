@@ -45,9 +45,9 @@
     }
 
     * { box-sizing: border-box; }
-    h1, h2, h3, p, li, .burst-item, .btn, .plan-name, .plan-sub {
+    h1, h2, h3, .burst-item, .plan-name, .plan-sub {
       word-break: keep-all;
-      overflow-wrap: normal;
+      overflow-wrap: break-word;
       line-break: strict;
     }
     html { scroll-behavior: smooth; }
@@ -87,6 +87,8 @@
     .center .section-title { text-align: center; }
     /* solutionパネル左列のtitleは左寄せ */
     .solution-inner > div > .section-title { text-align: left; }
+    /* solutionパネル左列のsection-leadは左寄せ */
+    .solution-inner > div > .section-lead { text-align: left; }
     .section-title .blue { color: var(--blue); }
     .section-lead {
       margin: 0 auto 30px;
@@ -243,7 +245,7 @@
       letter-spacing: 0;
       color: #fff;
       word-break: keep-all;
-      overflow-wrap: normal;
+      overflow-wrap: break-word;
       text-shadow: 5px 5px 0 var(--navy), 8px 8px 0 rgba(0,0,0,.22);
     }
     .hero-copy h1 .yellow { color: var(--yellow); }
@@ -525,7 +527,7 @@
       .solution-inner > div > .section-title { text-align: left; }
       .brand strong { font-size: 17px; }
       .hero { padding: 40px 0 38px; }
-      .hero-copy h1 { font-size: clamp(22px, 5.8vw, 30px); letter-spacing: 0; word-break: keep-all; overflow-wrap: normal; }
+      .hero-copy h1 { font-size: clamp(22px, 5.8vw, 30px); letter-spacing: 0; word-break: keep-all; overflow-wrap: break-word; }
       .comic-label { font-size: 12px; padding: 5px 10px; }
       .hero-copy p { font-size: 16px; }
       .zero-badge { font-size: 15px; }
