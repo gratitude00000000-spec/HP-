@@ -506,7 +506,7 @@
         padding-bottom: 8px;
       }
       .flow-grid::-webkit-scrollbar { display: none; }
-      .flow-step { flex: 0 0 78%; scroll-snap-align: start; }
+      .flow-step { flex: 0 0 72%; scroll-snap-align: start; }
       .flow-panel { overflow: visible; }
 
       /* HOW IT WORKS：横スライド */
@@ -520,8 +520,10 @@
         padding-bottom: 8px;
       }
       #ai-seo .reason-grid::-webkit-scrollbar { display: none; }
-      #ai-seo .reason-card { flex: 0 0 78%; scroll-snap-align: start; }
+      #ai-seo .reason-card { flex: 0 0 72%; scroll-snap-align: start; }
 
+      /* HOW IT WORKS パネル：はみ出し許可 */
+      #ai-seo .solution-panel { overflow: visible; }
       /* 比較テーブル：横スクロール */
       .compare-panel { overflow: visible; }
       .h-scroll {
@@ -564,7 +566,15 @@
       .person-arm, .fist { display: none; }
       .speech { width: 166px; right: 0; bottom: 86px; font-size: 13px; padding: 10px 14px; }
       .star.s2 { right: 20px; }
-      .problem-grid, .reason-grid, .flow-grid { grid-template-columns: 1fr; }
+      .problem-grid, .flow-grid { grid-template-columns: 1fr; }
+      /* 4つの理由：スマホでも2×2維持 */
+      #reasons .reason-card { padding: 16px 10px; }
+      #reasons .reason-icon { width: 50px; height: 50px; font-size: 17px; margin-bottom: 8px; }
+      #reasons .reason-card h3 { font-size: 15px; line-height: 1.3; }
+      #reasons .reason-card p { font-size: 12px; line-height: 1.5; }
+      /* FAQ：2×2でも読みやすく */
+      .faq-question { font-size: 13px; padding: 12px 14px; line-height: 1.45; }
+      .faq-answer-inner { font-size: 13px; padding: 0 14px 14px; }
       .section-head, .footer-top { flex-direction: column; align-items: flex-start; }
       .solution-panel, .compare-panel, .flow-panel, .company-panel { padding: 22px; }
       .solution-panel .section-title,
