@@ -449,7 +449,63 @@
       .compare-row .compare-cell:nth-child(2)::before { content: "一般的な制作会社・激安HP"; }
       .compare-row .compare-cell:nth-child(3)::before { content: "Gratitude"; }
     }
+    /* スワイプヒント：スマホのみ表示 */
+    .swipe-hint { display: none; }
+
     @media (max-width: 680px) {
+      /* ① 白い流れ線を非表示 */
+      .speed-lines { display: none; }
+      .hero::before {
+        background: repeating-radial-gradient(circle at 15% 15%, rgba(255,255,255,.22) 0 2px, transparent 2px 8px);
+      }
+
+      /* ② 横スライド共通 */
+      .swipe-hint { display: block; text-align: center; font-size: 12px; color: var(--blue); font-weight: 800; margin-top: 10px; }
+
+      /* 契約の流れ：横スライド */
+      .flow-grid {
+        display: flex !important;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 12px;
+        padding-bottom: 8px;
+      }
+      .flow-grid::-webkit-scrollbar { display: none; }
+      .flow-step { flex: 0 0 78%; scroll-snap-align: start; }
+      .flow-panel { overflow: visible; }
+
+      /* HOW IT WORKS：横スライド */
+      #ai-seo .reason-grid {
+        display: flex !important;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 12px;
+        padding-bottom: 8px;
+      }
+      #ai-seo .reason-grid::-webkit-scrollbar { display: none; }
+      #ai-seo .reason-card { flex: 0 0 78%; scroll-snap-align: start; }
+
+      /* 比較テーブル：横スクロール */
+      .compare-panel { overflow: visible; }
+      .h-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 8px;
+      }
+      .h-scroll::-webkit-scrollbar { display: none; }
+      .h-scroll .compare-table { min-width: 540px; }
+      .h-scroll .compare-row { grid-template-columns: 100px 1fr 1fr !important; display: grid !important; }
+      .h-scroll .compare-head { display: grid !important; }
+      .h-scroll .compare-cell { border-right: 3px solid var(--line) !important; border-bottom: 0 !important; font-size: 12px; }
+      .h-scroll .compare-row:not(:last-child) { border-bottom: 3px solid var(--line); }
+      .h-scroll .compare-cell:last-child { border-right: 0 !important; }
+      .h-scroll .compare-cell::before { display: none !important; }
+
       .pc-break { display: none; }
       .mobile-break { display: block; }
       body { line-height: 1.65; }
@@ -617,6 +673,7 @@
               <article class="reason-card"><div class="reason-icon">AI</div><h3>AIO / LLMO / AEO</h3><p>AI検索やAI回答でおすすめされやすくする考え方です。会社情報・強み・サービス内容をAIに伝わりやすく設計します。</p></article>
               <article class="reason-card"><div class="reason-icon">導</div><h3>導線設計</h3><p>HPを見た人が迷わず問い合わせ・予約・応募に進めるように、ボタン・文章・ページ構成を整えます。</p></article>
             </div>
+            <p class="swipe-hint">◀ スワイプして見る ▶</p>
           </div>
         </div>
       </div>
@@ -631,14 +688,17 @@
               <h2 class="section-title">格安HP・ノーコード制作との<span class="blue">違い</span></h2>
               <p class="section-lead">今は誰でもHPが作れる時代です。でも「作れること」と「集客できること」は別問題です。</p>
             </div>
-            <div class="compare-table">
-              <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">格安HP・ノーコード制作</div><div class="compare-cell">Gratitude</div></div>
-              <div class="compare-row"><div class="compare-cell">作り方</div><div class="compare-cell compare-bad">テンプレにはめるだけになりやすい</div><div class="compare-cell compare-good">業種・目的・導線から設計</div></div>
-              <div class="compare-row"><div class="compare-cell">目的</div><div class="compare-cell compare-bad">見た目を整えることが中心</div><div class="compare-cell compare-good">問い合わせ・予約・応募につなげる</div></div>
-              <div class="compare-row"><div class="compare-cell">SEO / MEO</div><div class="compare-cell compare-bad">ほぼ未対応、または別料金</div><div class="compare-cell compare-good">最初から検索導線を意識</div></div>
-              <div class="compare-row"><div class="compare-cell">AI検索</div><div class="compare-cell compare-bad">対応していないことが多い</div><div class="compare-cell compare-good">AIに伝わる情報設計を意識</div></div>
-              <div class="compare-row"><div class="compare-cell">公開後</div><div class="compare-cell compare-bad">作って終わり・放置されがち</div><div class="compare-cell compare-good">管理・相談・改善までサポート</div></div>
+            <div class="h-scroll">
+              <div class="compare-table">
+                <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">格安HP・ノーコード制作</div><div class="compare-cell">Gratitude</div></div>
+                <div class="compare-row"><div class="compare-cell">作り方</div><div class="compare-cell compare-bad">テンプレにはめるだけになりやすい</div><div class="compare-cell compare-good">業種・目的・導線から設計</div></div>
+                <div class="compare-row"><div class="compare-cell">目的</div><div class="compare-cell compare-bad">見た目を整えることが中心</div><div class="compare-cell compare-good">問い合わせ・予約・応募につなげる</div></div>
+                <div class="compare-row"><div class="compare-cell">SEO / MEO</div><div class="compare-cell compare-bad">ほぼ未対応、または別料金</div><div class="compare-cell compare-good">最初から検索導線を意識</div></div>
+                <div class="compare-row"><div class="compare-cell">AI検索</div><div class="compare-cell compare-bad">対応していないことが多い</div><div class="compare-cell compare-good">AIに伝わる情報設計を意識</div></div>
+                <div class="compare-row"><div class="compare-cell">公開後</div><div class="compare-cell compare-bad">作って終わり・放置されがち</div><div class="compare-cell compare-good">管理・相談・改善までサポート</div></div>
+              </div>
             </div>
+            <p class="swipe-hint">◀ スワイプして比較 ▶</p>
           </div>
         </div>
       </div>
@@ -653,17 +713,20 @@
               <h2 class="section-title">他社比較でわかる、<span class="blue">価格と内容の違い</span></h2>
               <p class="section-lead">一般的な制作会社・激安HP制作と比較しても、初期費用0円・AI/MEO対応・公開後サポートが強みです。</p>
             </div>
-            <div class="compare-table">
-              <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">一般的な制作会社 / 激安HP</div><div class="compare-cell">Gratitude</div></div>
-              <div class="compare-row"><div class="compare-cell">初期制作費</div><div class="compare-cell compare-bad">10万円〜50万円以上 / 激安でも別途費用あり</div><div class="compare-cell compare-good">0円から開始可能</div></div>
-              <div class="compare-row"><div class="compare-cell">月額費用</div><div class="compare-cell compare-bad">内容次第で高額 / 管理だけで内容が薄い</div><div class="compare-cell compare-good">月額7,980円〜（税抜）</div></div>
-              <div class="compare-row"><div class="compare-cell">同等内容の料金感</div><div class="compare-cell compare-bad">当社比で約3倍になるケースも</div><div class="compare-cell compare-good">制作・管理・集客導線まで込み</div></div>
-              <div class="compare-row"><div class="compare-cell">SEO / MEO</div><div class="compare-cell compare-bad">別料金、または未対応が多い</div><div class="compare-cell compare-good">基本設計に含める</div></div>
-              <div class="compare-row"><div class="compare-cell">AI検索対策</div><div class="compare-cell compare-bad">未対応が多い</div><div class="compare-cell compare-good">AIO / LLMO / AEOを意識</div></div>
-              <div class="compare-row"><div class="compare-cell">公開スピード</div><div class="compare-cell compare-bad">数週間〜数ヶ月</div><div class="compare-cell compare-good">最短1週間で公開可能</div></div>
-              <div class="compare-row"><div class="compare-cell">契約期間</div><div class="compare-cell compare-bad">6年縛り、短くても2年縛りが多い</div><div class="compare-cell compare-good">1年契約で始めやすい</div></div>
-              <div class="compare-row"><div class="compare-cell">公開後サポート</div><div class="compare-cell compare-bad">作って終わり / 更新は別料金</div><div class="compare-cell compare-good">管理・相談まで対応</div></div>
+            <div class="h-scroll">
+              <div class="compare-table">
+                <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">一般的な制作会社 / 激安HP</div><div class="compare-cell">Gratitude</div></div>
+                <div class="compare-row"><div class="compare-cell">初期制作費</div><div class="compare-cell compare-bad">10万円〜50万円以上 / 激安でも別途費用あり</div><div class="compare-cell compare-good">0円から開始可能</div></div>
+                <div class="compare-row"><div class="compare-cell">月額費用</div><div class="compare-cell compare-bad">内容次第で高額 / 管理だけで内容が薄い</div><div class="compare-cell compare-good">月額7,980円〜（税抜）</div></div>
+                <div class="compare-row"><div class="compare-cell">同等内容の料金感</div><div class="compare-cell compare-bad">当社比で約3倍になるケースも</div><div class="compare-cell compare-good">制作・管理・集客導線まで込み</div></div>
+                <div class="compare-row"><div class="compare-cell">SEO / MEO</div><div class="compare-cell compare-bad">別料金、または未対応が多い</div><div class="compare-cell compare-good">基本設計に含める</div></div>
+                <div class="compare-row"><div class="compare-cell">AI検索対策</div><div class="compare-cell compare-bad">未対応が多い</div><div class="compare-cell compare-good">AIO / LLMO / AEOを意識</div></div>
+                <div class="compare-row"><div class="compare-cell">公開スピード</div><div class="compare-cell compare-bad">数週間〜数ヶ月</div><div class="compare-cell compare-good">最短1週間で公開可能</div></div>
+                <div class="compare-row"><div class="compare-cell">契約期間</div><div class="compare-cell compare-bad">6年縛り、短くても2年縛りが多い</div><div class="compare-cell compare-good">1年契約で始めやすい</div></div>
+                <div class="compare-row"><div class="compare-cell">公開後サポート</div><div class="compare-cell compare-bad">作って終わり / 更新は別料金</div><div class="compare-cell compare-good">管理・相談まで対応</div></div>
+              </div>
             </div>
+            <p class="swipe-hint">◀ スワイプして比較 ▶</p>
           </div>
         </div>
       </div>
@@ -684,6 +747,7 @@
               <div class="flow-step"><div class="step-tag">カンタン STEP 03</div><div class="flow-icon">💻</div><strong>制作開始</strong><br><small>デザイン・文章作成</small></div>
               <div class="flow-step"><div class="step-tag">カンタン STEP 04</div><div class="flow-icon">🚀</div><strong>最短1週間で公開</strong><br><small>公開後サポート開始</small></div>
             </div>
+            <p class="swipe-hint">◀ スワイプして見る ▶</p>
           </div>
         </div>
       </div>
