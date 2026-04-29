@@ -96,6 +96,7 @@
       color: var(--muted);
       font-weight: 800;
       text-align: center;
+      text-wrap: balance;
     }
     .comic-label {
       display: inline-flex;
@@ -358,7 +359,7 @@
     .thumb { position: relative; min-height: 126px; background: linear-gradient(135deg, #fff, #eaf4ff 56%, #f7fbff); border-bottom: 4px solid var(--line); overflow: hidden; }
     .thumb::before { content: ""; position: absolute; left: 20px; right: 20px; bottom: 18px; height: 62px; border: 3px solid var(--line); border-radius: 14px; background: linear-gradient(135deg, rgba(8,104,215,.13), transparent), #fff; }
     .thumb::after { content: "?"; position: absolute; right: 24px; top: 18px; font-size: 54px; font-weight: 1000; color: var(--blue); text-shadow: 3px 3px 0 var(--yellow); transform: rotate(8deg); }
-    .thumb-q { position: absolute; left: 0; right: 0; bottom: 22px; z-index: 3; text-align: center; font-size: 14px; font-weight: 1000; line-height: 1.35; color: var(--ink); padding: 0 28px; word-break: keep-all; }
+    .thumb-q { position: absolute; left: 0; right: 0; bottom: 18px; height: 62px; display: flex; align-items: center; justify-content: center; z-index: 3; text-align: center; font-size: 14px; font-weight: 1000; line-height: 1.35; color: var(--ink); padding: 0 28px; word-break: keep-all; }
     .num { position: absolute; left: 12px; top: 12px; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; border: 4px solid var(--line); background: var(--yellow); font-weight: 1000; z-index: 2; }
     .problem-grid { grid-template-columns: repeat(4, 1fr); }
     .problem-card h3 { margin: 0 0 8px; font-size: 21px; line-height: 1.3; letter-spacing: .01em; text-align: left; }
@@ -480,7 +481,7 @@
       .compare-cell::before { display: block; font-size: 12px; color: var(--blue); margin-bottom: 4px; }
       .compare-row .compare-cell:nth-child(1)::before { content: "比較項目"; }
       .compare-row .compare-cell:nth-child(2)::before { content: "一般的な制作会社・激安HP"; }
-      .compare-row .compare-cell:nth-child(3)::before { content: "Gratitude"; }
+      .compare-row .compare-cell:nth-child(3)::before { content: "当社"; }
     }
     /* スワイプヒント：スマホのみ表示 */
     .swipe-hint { display: none; }
@@ -548,6 +549,7 @@
       .section { padding: 46px 0; }
       .section-title { letter-spacing: 0; }
       .solution-inner > div > .section-title { text-align: left; }
+      .section-lead { text-align: left; text-wrap: balance; }
       .brand strong { font-size: 17px; }
       .hero { padding: 40px 0 38px; }
       .hero-copy h1 { font-size: clamp(22px, 5.8vw, 30px); letter-spacing: 0; word-break: keep-all; overflow-wrap: break-word; }
@@ -572,7 +574,7 @@
       .problem-card p { font-size: 12px; }
       .problem-card .card-body { padding: 14px 12px; }
       .thumb { min-height: 100px; }
-      .thumb-q { font-size: 11px; bottom: 14px; padding: 0 20px; }
+      .thumb-q { font-size: 11px; padding: 0 16px; }
       .thumb::after { font-size: 38px; right: 10px; top: 10px; }
       .num { width: 34px; height: 34px; font-size: 13px; }
       /* 4つの理由：スマホでも2×2維持 */
@@ -741,7 +743,7 @@
             </div>
             <div class="h-scroll">
               <div class="compare-table">
-                <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">格安HP・ノーコード制作</div><div class="compare-cell">Gratitude</div></div>
+                <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">格安HP・ノーコード制作</div><div class="compare-cell">当社</div></div>
                 <div class="compare-row"><div class="compare-cell">作り方</div><div class="compare-cell compare-bad">テンプレにはめるだけになりやすい</div><div class="compare-cell compare-good">業種・目的・導線から設計</div></div>
                 <div class="compare-row"><div class="compare-cell">目的</div><div class="compare-cell compare-bad">見た目を整えることが中心</div><div class="compare-cell compare-good">問い合わせ・予約・応募につなげる</div></div>
                 <div class="compare-row"><div class="compare-cell">SEO / MEO</div><div class="compare-cell compare-bad">ほぼ未対応、または別料金</div><div class="compare-cell compare-good">最初から検索導線を意識</div></div>
@@ -766,7 +768,7 @@
             </div>
             <div class="h-scroll">
               <div class="compare-table">
-                <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">一般的な制作会社 / 激安HP</div><div class="compare-cell">Gratitude</div></div>
+                <div class="compare-row compare-head"><div class="compare-cell">項目</div><div class="compare-cell">一般的な制作会社 / 激安HP</div><div class="compare-cell">当社</div></div>
                 <div class="compare-row"><div class="compare-cell">初期制作費</div><div class="compare-cell compare-bad">10万円〜50万円以上 / 激安でも別途費用あり</div><div class="compare-cell compare-good">0円から開始可能</div></div>
                 <div class="compare-row"><div class="compare-cell">月額費用</div><div class="compare-cell compare-bad">内容次第で高額 / 管理だけで内容が薄い</div><div class="compare-cell compare-good">月額7,980円〜（税抜）</div></div>
                 <div class="compare-row"><div class="compare-cell">同等内容の料金感</div><div class="compare-cell compare-bad">当社比で約3倍になるケースも</div><div class="compare-cell compare-good">制作・管理・集客導線まで込み</div></div>
