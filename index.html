@@ -293,8 +293,8 @@
     .zero-badge strong { color: var(--blue); font-size: 30px; margin: 0 4px; }
 
     .hero-character { min-height: 500px; position: relative; display: flex; justify-content: flex-end; align-items: flex-end; }
-    .hero-character::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 55% 50%, rgba(255,255,255,.26) 0%, rgba(255,255,255,.08) 40%, transparent 65%); pointer-events: none; }
-    .hero-char-img { width: min(440px, 100%); height: auto; display: block; position: relative; z-index: 2; mask-image: radial-gradient(ellipse 88% 90% at 52% 46%, black 38%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 88% 90% at 52% 46%, black 38%, transparent 100%); filter: drop-shadow(-8px 0 20px rgba(255,255,255,.2)) drop-shadow(0 24px 44px rgba(0,0,0,.38)); }
+    .hero-character::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 55% 55%, rgba(255,180,50,.18) 0%, transparent 60%); pointer-events: none; }
+    .hero-char-img { width: min(440px, 100%); height: auto; display: block; position: relative; z-index: 2; filter: drop-shadow(-6px 0 18px rgba(255,180,50,.25)) drop-shadow(0 20px 40px rgba(0,0,0,.4)); }
     .burst {
       position: absolute;
       inset: 26px 0 0;
@@ -651,7 +651,7 @@
           </div>
         </div>
         <div class=”hero-character fade-up”>
-          <img src=”character.png” alt=”AIに選ばれるHP制作” class=”hero-char-img”>
+          <img src=”character_nobg.png” alt=”AIに選ばれるHP制作” class=”hero-char-img”>
         </div>
       </div>
     </section>
