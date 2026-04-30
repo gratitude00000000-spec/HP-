@@ -292,7 +292,9 @@
     }
     .zero-badge strong { color: var(--blue); font-size: 30px; margin: 0 4px; }
 
-    .hero-visual { min-height: 500px; position: relative; display: flex; align-items: center; justify-content: center; }
+    .hero-character { min-height: 500px; position: relative; display: flex; justify-content: flex-end; align-items: flex-end; }
+    .hero-character::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 55% 50%, rgba(255,255,255,.26) 0%, rgba(255,255,255,.08) 40%, transparent 65%); pointer-events: none; }
+    .hero-char-img { width: min(440px, 100%); height: auto; display: block; position: relative; z-index: 2; mask-image: radial-gradient(ellipse 88% 90% at 52% 46%, black 38%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 88% 90% at 52% 46%, black 38%, transparent 100%); filter: drop-shadow(-8px 0 20px rgba(255,255,255,.2)) drop-shadow(0 24px 44px rgba(0,0,0,.38)); }
     .burst {
       position: absolute;
       inset: 26px 0 0;
@@ -466,9 +468,8 @@
     @media (max-width: 1100px) {
       .hero-grid, .solution-inner, .cta-grid, .company-grid { grid-template-columns: 1fr; }
       .problem-grid, .reason-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-visual { min-height: 500px; }
-      .device-panel { left: auto; transform: translateX(-64px) rotate(-5deg); }
-      .comic-person { right: 8%; }
+      .hero-character { min-height: 420px; justify-content: center; }
+      .hero-char-img { width: min(380px, 100%); }
     }
     @media (max-width: 940px) {
       .nav, .header-cta { display: none; }
@@ -563,7 +564,8 @@
       .hero-copy p { font-size: 16px; }
       .zero-badge { font-size: 15px; }
       .zero-badge strong { font-size: 24px; }
-      .hero-visual { min-height: auto; flex-direction: column; padding-top: 20px; }
+      .hero-character { min-height: auto; justify-content: center; margin-top: 16px; }
+      .hero-char-img { width: min(260px, 80%); }
       .device-panel { width: 286px; left: auto; top: auto; transform: rotate(-4deg); margin: 0 auto; }
       .comic-person { width: 176px; height: 280px; right: auto; bottom: auto; position: relative; margin: -40px auto 0; transform: scale(.92); }
       .person-head { left: 50px; width: 84px; height: 92px; }
@@ -648,19 +650,8 @@
             <div class="hero-badge">📍 MEO導線</div>
           </div>
         </div>
-        <div class="hero-visual fade-up" aria-hidden="true">
-          <div class="burst"></div>
-          <div class="star s1">★</div><div class="star s2">★</div>
-          <div class="device-panel">
-            <div class="device-top"><span></span><span></span><span></span></div>
-            <div class="device-screen"><div class="chart-box"><div class="bars"><span></span><span></span><span></span><span></span></div></div></div>
-          </div>
-          <div class="speech">“見られるHP”から<br>“選ばれるHP”へ！</div>
-          <div class="comic-person">
-            <div class="person-head"><div class="person-hair"></div><span class="person-eye left"></span><span class="person-eye right"></span><div class="person-smile"></div></div>
-            <div class="person-arm arm-left"></div><div class="person-arm arm-right"></div><div class="fist"></div>
-            <div class="person-body"><div class="person-shirt"></div></div>
-          </div>
+        <div class=”hero-character fade-up”>
+          <img src=”character.png” alt=”AIに選ばれるHP制作” class=”hero-char-img”>
         </div>
       </div>
     </section>
