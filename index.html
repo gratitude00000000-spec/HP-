@@ -570,13 +570,13 @@
       .zero-badge strong { font-size: 24px; }
       .hero-copy { padding-right: 0; position: static; }
       .hero-character { display: none; }
-      .hero-copy-top { position: static; padding-right: 0; padding-bottom: 0; }
+      .hero-copy-top { position: relative; padding-right: 120px; padding-bottom: 8px; }
       .hero-desc-pc { display: none; }
       .hero-sp-desc { display: block; color: rgba(255,255,255,.92); font-size: 14px; font-weight: 700; line-height: 1.7; margin: 10px 0 14px; }
       .hero-sp-free { display: block; color: var(--yellow); font-size: 13px; font-weight: 900; letter-spacing: .02em; margin-bottom: 16px; padding: 6px 0; border-top: 1px solid rgba(255,255,255,.25); border-bottom: 1px solid rgba(255,255,255,.25); }
       .btn-row { gap: 12px; }
-      .hero-char-sp { display: flex; justify-content: center; margin: 24px 0 8px; }
-      .hero-char-sp .hero-char-img { width: 60%; max-width: 240px; height: auto; }
+      .hero-char-sp { display: flex; position: absolute; right: 10px; top: 0; bottom: 0; width: 104px; align-items: flex-end; justify-content: center; margin: 0; }
+      .hero-char-sp .hero-char-img { width: 100%; max-width: 180px; height: auto; }
       .device-panel { width: 286px; left: auto; top: auto; transform: rotate(-4deg); margin: 0 auto; }
       .comic-person { width: 176px; height: 280px; right: auto; bottom: auto; position: relative; margin: -40px auto 0; transform: scale(.92); }
       .person-head { left: 50px; width: 84px; height: 92px; }
@@ -657,10 +657,10 @@
               <a class="btn btn-primary" href="#contact">まずは話だけ聞いてみる</a>
               <a class="btn btn-dark" href="#contact">今のHPを診断する</a>
             </div>
-          </div>
             <div class="hero-char-sp">
               <img src="hero.png" alt="AIに選ばれるHP制作" class="hero-char-img">
             </div>
+          </div>
           <div class="zero-badge">通常かかる制作費が <strong>0円</strong> 月額だけで開始OK</div>
           <div class="hero-badges">
             <div class="hero-badge">🧠 AIO/LLMO/AEO</div>
