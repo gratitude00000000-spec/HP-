@@ -1,0 +1,3 @@
+# Netlify リダイレクト設定
+# /blog/:slug を blog/article.html にルーティング（URLはそのまま維持）
+/blog/:slug  /blog/article.html  200

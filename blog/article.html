@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- SEO は JS で動的に更新 -->
+  <title>ブログ記事｜AI集客ドットコム</title>
+  <meta name="description" content="AI集客ドットコムのブログ記事です。" />
+  <link rel="canonical" id="canonicalTag" href="https://hp.ai-marketing-japan.jp/blog" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AI集客ドットコム">
+  <meta property="og:locale" content="ja_JP">
+  <meta id="ogTitle"       property="og:title"       content="">
+  <meta id="ogDesc"        property="og:description" content="">
+  <meta id="ogUrl"         property="og:url"         content="">
+  <meta id="ogImage"       property="og:image"       content="https://hp.ai-marketing-japan.jp/ogp_hp_.jpg">
+  <meta id="twitterCard"   name="twitter:card"       content="summary_large_image">
+  <meta id="twitterTitle"  name="twitter:title"      content="">
+  <meta id="twitterDesc"   name="twitter:description" content="">
+  <meta id="twitterImage"  name="twitter:image"      content="https://hp.ai-marketing-japan.jp/ogp_hp_.jpg">
+
+  <style>
+    :root {
+      --blue: #0868d7;
+      --navy: #03153b;
+      --yellow: #ffd21f;
+      --orange: #ff9b1f;
+      --paper: #fffdf7;
+      --ink: #10152a;
+      --muted: #5d6780;
+      --line: #111827;
+      --max: 860px;
+      --max-wide: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif; line-height: 1.68; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max-wide), calc(100% - 28px)); margin: 0 auto; }
+    .container-narrow { width: min(var(--max), calc(100% - 28px)); margin: 0 auto; }
+
+    /* ── header ── */
+    .site-header { position: sticky; top: 0; z-index: 1000; background: rgba(3,21,59,.96); border-bottom: 4px solid var(--line); }
+    .header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .brand { display: flex; align-items: center; gap: 12px; color: #fff; min-width: 0; }
+    .brand-mark { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; border: 3px solid #fff; background: linear-gradient(135deg, var(--yellow), var(--orange)); color: var(--navy); font-weight: 1000; font-size: 24px; transform: rotate(-5deg); flex: 0 0 auto; }
+    .brand strong { display: block; font-size: 20px; line-height: 1.1; white-space: nowrap; }
+    .brand span { display: block; font-size: 12px; color: rgba(255,255,255,.78); }
+    .nav { display: flex; align-items: center; gap: 18px; color: #fff; font-weight: 1000; font-size: 13px; white-space: nowrap; }
+    .nav a { display: inline-flex; align-items: center; line-height: 1; }
+    .nav a.active { color: var(--yellow); border-bottom: 2px solid var(--yellow); padding-bottom: 2px; }
+    .header-cta { display: flex; gap: 10px; align-items: center; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 0 20px; border: 3px solid var(--line); border-radius: 14px; font-weight: 1000; transition: transform .18s, box-shadow .18s; text-align: center; line-height: 1.25; cursor: pointer; }
+    .btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 rgba(0,0,0,.18); }
+    .btn-white { background: #fff; color: var(--ink); }
+    .header-phone { display: inline-flex; align-items: center; min-height: 46px; padding: 0 14px; border-radius: 12px; border: 3px solid #fff; background: var(--yellow); color: var(--ink); font-weight: 1000; font-size: 13px; }
+    .menu-toggle { display: none; width: 48px; height: 48px; border: 3px solid #fff; border-radius: 12px; color: #fff; background: transparent; font-size: 24px; cursor: pointer; align-items: center; justify-content: center; }
+
+    /* ── breadcrumb ── */
+    .breadcrumb { padding: 16px 0 0; }
+    .breadcrumb ol { display: flex; gap: 6px; align-items: center; list-style: none; margin: 0; padding: 0; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+    .breadcrumb li::after { content: "›"; margin-left: 6px; color: #ccc; }
+    .breadcrumb li:last-child::after { display: none; }
+    .breadcrumb a { color: var(--blue); }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* ── article hero ── */
+    .article-hero { padding: 36px 0 0; }
+    .article-hero-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+    .article-date { font-size: 13px; color: var(--muted); font-weight: 700; }
+    .article-cat { font-size: 12px; font-weight: 1000; padding: 4px 12px; border-radius: 6px; background: #e8f0fe; color: var(--blue); }
+    .article-title { margin: 0 0 28px; font-size: clamp(22px, 4vw, 36px); font-weight: 1000; line-height: 1.35; }
+    .article-eyecatch { width: 100%; border-radius: 16px; border: 3px solid var(--line); overflow: hidden; margin-bottom: 40px; aspect-ratio: 16/9; background: linear-gradient(135deg, #dde8fa, #c8d9f8); }
+    .article-eyecatch img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── article body ── */
+    .article-section { padding-bottom: 80px; }
+    .article-body { font-size: 16px; line-height: 1.9; }
+    .article-body h2 { font-size: clamp(20px, 3vw, 28px); font-weight: 1000; margin: 2em 0 .8em; padding-left: 14px; border-left: 5px solid var(--blue); }
+    .article-body h3 { font-size: clamp(17px, 2.5vw, 22px); font-weight: 1000; margin: 1.8em 0 .6em; }
+    .article-body p { margin: 0 0 1.4em; }
+    .article-body ul, .article-body ol { padding-left: 1.6em; margin: 0 0 1.4em; }
+    .article-body li { margin-bottom: .4em; }
+    .article-body a { color: var(--blue); text-decoration: underline; }
+    .article-body img { max-width: 100%; border-radius: 10px; margin: 1em 0; }
+    .article-body blockquote { border-left: 4px solid #d0dff8; margin: 1.4em 0; padding: .8em 1.2em; background: #f2f6ff; border-radius: 0 10px 10px 0; color: var(--muted); }
+    .article-body pre { background: #1a1f35; color: #e8edf8; padding: 1.2em; border-radius: 10px; overflow-x: auto; font-size: 14px; margin: 1.4em 0; }
+    .article-body code { background: #eef2fb; color: var(--blue); padding: 2px 6px; border-radius: 4px; font-size: .9em; }
+    .article-body pre code { background: none; color: inherit; padding: 0; }
+    .article-body table { width: 100%; border-collapse: collapse; margin: 1.4em 0; font-size: 14px; }
+    .article-body th, .article-body td { border: 1px solid #d8e0ef; padding: 10px 14px; text-align: left; }
+    .article-body th { background: #e8f0fe; font-weight: 1000; }
+
+    /* ── back link ── */
+    .back-link-wrap { margin: 40px 0 20px; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 1000; color: var(--blue); border: 2px solid var(--blue); border-radius: 10px; padding: 10px 20px; transition: background .15s, color .15s; }
+    .back-link:hover { background: var(--blue); color: #fff; }
+
+    /* ── CTA banner ── */
+    .article-cta { background: linear-gradient(135deg, #074fb3, #0877f2); border: 4px solid var(--line); border-radius: 20px; padding: 40px 36px; text-align: center; color: #fff; margin: 48px 0 60px; }
+    .article-cta h3 { margin: 0 0 12px; font-size: clamp(18px, 3vw, 26px); font-weight: 1000; text-shadow: 2px 2px 0 rgba(0,0,0,.2); }
+    .article-cta p { margin: 0 0 24px; color: rgba(255,255,255,.84); font-size: 14px; }
+    .article-cta .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 36px; background: linear-gradient(135deg, var(--yellow), var(--orange)); color: var(--ink); border: 3px solid var(--line); border-radius: 14px; font-weight: 1000; font-size: 16px; box-shadow: 5px 5px 0 rgba(0,0,0,.2); transition: transform .18s, box-shadow .18s; }
+    .article-cta .cta-btn:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 rgba(0,0,0,.2); }
+
+    /* ── loading / error ── */
+    .page-loading { text-align: center; padding: 100px 0; color: var(--muted); }
+    .spinner { width: 48px; height: 48px; border: 5px solid #e4eaf5; border-top-color: var(--blue); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 20px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .page-error { text-align: center; padding: 80px 20px; }
+    .page-error h1 { font-size: 26px; color: var(--muted); margin: 0 0 12px; }
+    .page-error p { color: var(--muted); font-size: 14px; }
+
+    /* ── footer ── */
+    .site-footer { background: var(--navy); color: rgba(255,255,255,.86); padding: 30px 0 40px; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; padding-bottom: 24px; border-bottom: 2px solid rgba(255,255,255,.12); margin-bottom: 18px; }
+    .footer-nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; font-weight: 800; }
+    .footer-nav a:hover { text-decoration: underline; }
+    .copyright { font-size: 12px; color: rgba(255,255,255,.44); }
+
+    /* ── responsive ── */
+    @media (max-width: 767px) {
+      .nav, .header-cta { display: none; }
+      .site-header.open .nav {
+        display: flex; position: absolute; left: 14px; right: 14px; top: 80px;
+        background: rgba(3,21,59,.98); border: 4px solid #fff; border-radius: 18px;
+        padding: 18px; flex-direction: column; align-items: flex-start; gap: 16px; z-index: 999;
+      }
+      .menu-toggle { display: flex; }
+      .article-cta { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <div class="brand-mark">G</div>
+        <div><strong>株式会社Gratitude</strong><span>AIに選ばれるHP制作</span></div>
+      </a>
+      <nav class="nav" aria-label="グローバルナビゲーション">
+        <a href="/#service">特徴</a>
+        <a href="/#ai-seo">集客の仕組み</a>
+        <a href="/#compare">他社比較</a>
+        <a href="/#flow">契約までの流れ</a>
+        <a href="/#pricing">料金</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/blog" class="active">ブログ</a>
+      </nav>
+      <div class="header-cta">
+        <a class="btn btn-white" href="/#contact">無料相談</a>
+        <a class="header-phone" href="tel:0989755682">098-975-5682</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く">☰</button>
+    </div>
+  </header>
+
+  <main id="articleMain">
+    <div class="page-loading">
+      <div class="spinner"></div>
+      <p>記事を読み込んでいます...</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <strong style="font-size:22px;display:block;">株式会社Gratitude</strong>
+          <span style="color:rgba(255,255,255,.62);font-size:14px;">AIに選ばれるHP制作</span>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <a href="/#service">特徴</a>
+          <a href="/#ai-seo">集客の仕組み</a>
+          <a href="/#compare">他社比較</a>
+          <a href="/#flow">契約までの流れ</a>
+          <a href="/#pricing">料金</a>
+          <a href="/#faq">FAQ</a>
+          <a href="/#company">会社概要</a>
+          <a href="/blog">ブログ</a>
+          <a href="#">プライバシーポリシー</a>
+        </nav>
+      </div>
+      <div class="copyright">© 2024 株式会社Gratitude All Rights Reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // microCMS 設定 — 以下2行をご自身の値に変更してください
+    const MICROCMS_SERVICE = 'YOUR_SERVICE_DOMAIN'; // 例: 'your-company'
+    const MICROCMS_KEY     = 'YOUR_API_KEY';        // microCMS管理画面のAPIキー
+    const BLOG_ENDPOINT    = 'blogs';               // microCMSのエンドポイント名
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    function fmtDate(iso) {
+      if (!iso) return '';
+      const d = new Date(iso);
+      return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+    }
+
+    function getCat(a) {
+      if (!a.category) return '';
+      if (typeof a.category === 'string') return a.category;
+      if (a.category.name) return a.category.name;
+      if (Array.isArray(a.category) && a.category[0]) return a.category[0].name || a.category[0];
+      return '';
+    }
+
+    function updateSEO(a) {
+      const title = `${a.title}｜AI集客ドットコム ブログ`;
+      const desc  = a.description || a.excerpt || a.summary
+        || (a.body ? a.body.replace(/<[^>]+>/g,'').slice(0,120) + '…' : '');
+      const url   = `https://hp.ai-marketing-japan.jp/blog/${a.id}`;
+      const img   = a.eyecatch ? a.eyecatch.url : 'https://hp.ai-marketing-japan.jp/ogp_hp_.jpg';
+
+      document.title = title;
+      document.querySelector('meta[name="description"]').content = desc;
+      document.getElementById('canonicalTag').href = url;
+      document.getElementById('ogTitle').content  = title;
+      document.getElementById('ogDesc').content   = desc;
+      document.getElementById('ogUrl').content    = url;
+      document.getElementById('ogImage').content  = img;
+      document.getElementById('twitterTitle').content = title;
+      document.getElementById('twitterDesc').content  = desc;
+      document.getElementById('twitterImage').content = img;
+    }
+
+    async function loadArticle() {
+      const parts = window.location.pathname.split('/').filter(Boolean);
+      const slug  = parts[1];
+
+      if (!slug) {
+        window.location.href = '/blog';
+        return;
+      }
+
+      try {
+        const res = await fetch(
+          `https://${MICROCMS_SERVICE}.microcms.io/api/v1/${BLOG_ENDPOINT}/${slug}`,
+          { headers: { 'X-MICROCMS-API-KEY': MICROCMS_KEY } }
+        );
+        if (res.status === 404) throw Object.assign(new Error('404'), { code: 404 });
+        if (!res.ok) throw new Error(res.status);
+        const a = await res.json();
+
+        updateSEO(a);
+
+        const date = fmtDate(a.publishedAt || a.createdAt);
+        const cat  = getCat(a);
+        const eyecatchHTML = a.eyecatch
+          ? `<div class="article-eyecatch"><img src="${a.eyecatch.url}?w=1200&q=85" alt="${a.title}"></div>`
+          : '';
+
+        document.getElementById('articleMain').innerHTML = `
+          <div class="container-narrow">
+            <nav class="breadcrumb" aria-label="パンくずリスト">
+              <ol>
+                <li><a href="/">ホーム</a></li>
+                <li><a href="/blog">ブログ</a></li>
+                <li>${a.title}</li>
+              </ol>
+            </nav>
+
+            <section class="article-hero">
+              <div class="article-hero-meta">
+                ${date ? `<span class="article-date">📅 ${date}</span>` : ''}
+                ${cat  ? `<span class="article-cat">${cat}</span>` : ''}
+              </div>
+              <h1 class="article-title">${a.title}</h1>
+              ${eyecatchHTML}
+            </section>
+
+            <section class="article-section">
+              <div class="article-body">${a.body || ''}</div>
+
+              <div class="article-cta">
+                <h3>AIに選ばれる集客HPを、一緒に作りませんか？</h3>
+                <p>初期制作費0円・月額から始められます。SEO・MEO・AI対策もまとめて対応。</p>
+                <a class="cta-btn" href="/#contact">無料相談はこちら →</a>
+              </div>
+
+              <div class="back-link-wrap">
+                <a class="back-link" href="/blog">← ブログ一覧に戻る</a>
+              </div>
+            </section>
+          </div>`;
+      } catch (err) {
+        const is404 = err.code === 404;
+        document.getElementById('articleMain').innerHTML = `
+          <div class="container-narrow">
+            <div class="page-error">
+              <h1>${is404 ? '記事が見つかりません' : '読み込みに失敗しました'}</h1>
+              <p>${is404
+                ? 'URLをお確かめいただくか、ブログ一覧からご確認ください。'
+                : 'しばらく経ってから再度お試しください。'}</p>
+              <p style="margin-top:28px;"><a class="back-link" href="/blog">← ブログ一覧に戻る</a></p>
+            </div>
+          </div>`;
+      }
+    }
+
+    // header toggle
+    const header = document.getElementById('siteHeader');
+    const toggle = document.getElementById('menuToggle');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 10));
+    toggle.addEventListener('click', () => header.classList.toggle('open'));
+    document.querySelectorAll('.nav a, .footer-nav a, .brand').forEach(l => l.addEventListener('click', () => header.classList.remove('open')));
+
+    loadArticle();
+  </script>
+</body>
+</html>
