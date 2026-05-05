@@ -296,6 +296,7 @@
     }
 
     function cardHTML(a) {
+      const slug    = (a.seo && a.seo.slug) || a.id;
       const date    = fmtDate(a.publishedAt || a.createdAt);
       const cat     = getCat(a);
       const excerpt = getExcerpt(a);
@@ -304,15 +305,15 @@
         : `<div class="card-thumb-placeholder">📝</div>`;
       return `
         <article class="blog-card">
-          <a href="/blog/${a.id}" class="card-thumb">${img}</a>
+          <a href="/blog/${slug}" class="card-thumb">${img}</a>
           <div class="card-body">
             <div class="card-meta">
               ${date ? `<span class="card-date">${date}</span>` : ''}
               ${cat  ? `<span class="card-cat">${cat}</span>`  : ''}
             </div>
-            <h2 class="card-title"><a href="/blog/${a.id}">${a.title}</a></h2>
+            <h2 class="card-title"><a href="/blog/${slug}">${a.title}</a></h2>
             ${excerpt ? `<p class="card-excerpt">${excerpt}</p>` : ''}
-            <div class="card-cta"><a href="/blog/${a.id}">続きを読む →</a></div>
+            <div class="card-cta"><a href="/blog/${slug}">続きを読む →</a></div>
           </div>
         </article>`;
     }
