@@ -61,7 +61,7 @@ export default async function handler(request, context) {
   const html = await response.text();
 
   // ── SEO値の計算 ──
-  const seo         = article.seo || {};
+  const seo         = article.seotitle || {};
   const articleSlug = seo.slug || article.id;
   const canonical   = `${BASE_URL}/blog/${articleSlug}`;
 
@@ -71,7 +71,7 @@ export default async function handler(request, context) {
 
   const metaDesc = seo.metaDescription
     || article.description || article.excerpt || article.summary
-    || (article.body ? stripHtml(article.body).slice(0, 120) + '…' : '');
+    || (article.content ? stripHtml(article.content).slice(0, 120) + '…' : '');
 
   const ogDesc = seo.ogpDescription || seo.metaDescription || metaDesc;
 

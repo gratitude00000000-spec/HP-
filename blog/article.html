@@ -210,7 +210,7 @@
     }
 
     function updateSEO(a) {
-      const seo = a.seo || {};
+      const seo = a.seotitle || {};
       const slug = seo.slug || a.id;
 
       const pageTitle = seo.seoTitle
@@ -219,7 +219,7 @@
 
       const metaDesc = seo.metaDescription
         || a.description || a.excerpt || a.summary
-        || (a.body ? a.body.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 120) + '…' : '');
+        || (a.content ? a.content.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 120) + '…' : '');
 
       const ogDesc = seo.ogpDescription || seo.metaDescription
         || a.description || a.excerpt || a.summary || metaDesc;
@@ -288,7 +288,7 @@
 
         updateSEO(a);
 
-        const seo  = a.seo || {};
+        const seo  = a.seotitle || {};
         const slug = seo.slug || a.id;
         const date = fmtDate(a.publishedAt || a.createdAt);
         const cat  = getCat(a);
@@ -316,7 +316,7 @@
             </section>
 
             <section class="article-section">
-              <div class="article-body">${a.body || ''}</div>
+              <div class="article-body">${a.content || ''}</div>
 
               <div class="article-cta">
                 <h3>AIに選ばれる集客HPを、一緒に作りませんか？</h3>

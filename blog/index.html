@@ -280,8 +280,8 @@
     function getExcerpt(a) {
       const src = a.description || a.excerpt || a.summary || '';
       if (src) return src.slice(0, 120) + (src.length > 120 ? '…' : '');
-      if (a.body) {
-        const t = a.body.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+      if (a.content) {
+        const t = a.content.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
         return t.slice(0, 120) + (t.length > 120 ? '…' : '');
       }
       return '';
@@ -296,7 +296,7 @@
     }
 
     function cardHTML(a) {
-      const slug    = (a.seo && a.seo.slug) || a.id;
+      const slug    = (a.seotitle && a.seotitle.slug) || a.id;
       const date    = fmtDate(a.publishedAt || a.createdAt);
       const cat     = getCat(a);
       const excerpt = getExcerpt(a);
