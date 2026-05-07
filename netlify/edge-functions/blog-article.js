@@ -14,6 +14,13 @@ function stripHtml(s) {
   return (s || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 }
 
+// 10文字以上かつ日本語を含む場合のみ有効な説明文とみなす
+function isValidDesc(s) {
+  if (!s) return false;
+  const t = s.trim();
+  return t.length >= 10 && /[぀-鿿]/.test(t);
+}
+
 async function fetchArticle(slug) {
   const headers = { 'X-MICROCMS-API-KEY': MICROCMS_KEY };
   const base = `https://${MICROCMS_SERVICE}.microcms.io/api/v1/${BLOG_ENDPOINT}`;
@@ -73,7 +80,9 @@ export default async function handler(request, context) {
     || article.description || article.excerpt || article.summary
     || (article.content ? stripHtml(article.content).slice(0, 120) + '…' : '');
 
-  const ogDesc = seo.ogpDescription || seo.metaDescription || metaDesc;
+  const ogDesc = (isValidDesc(seo.ogpDescription) ? seo.ogpDescription : null)
+    || seo.metaDescription
+    || metaDesc;
 
   const ogImg = (seo.ogpImage && seo.ogpImage.url)
     ? seo.ogpImage.url

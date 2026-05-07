@@ -221,8 +221,10 @@
         || a.description || a.excerpt || a.summary
         || (a.content ? a.content.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 120) + '…' : '');
 
-      const ogDesc = seo.ogpDescription || seo.metaDescription
-        || a.description || a.excerpt || a.summary || metaDesc;
+      const isValidDesc = s => !!s && s.trim().length >= 10 && /[぀-鿿]/.test(s);
+      const ogDesc = (isValidDesc(seo.ogpDescription) ? seo.ogpDescription : null)
+        || seo.metaDescription
+        || metaDesc;
 
       const ogImg = (seo.ogpImage && seo.ogpImage.url)
         ? seo.ogpImage.url
