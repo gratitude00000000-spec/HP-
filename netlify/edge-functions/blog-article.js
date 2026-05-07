@@ -90,10 +90,10 @@ export default async function handler(request, context) {
       /<meta name="description"[^>]*\/>/,
       `<meta name="description" content="${esc(metaDesc)}" />`
     )
-    // canonical（id属性あり版 → link要素に変更）
+    // canonical
     .replace(
       /<link rel="canonical"[^>]*>/,
-      `<link rel="canonical" href="${esc(canonical)}" />`
+      `<link rel="canonical" id="canonicalTag" href="${esc(canonical)}" />`
     )
     // og:title
     .replace(/(<meta id="ogTitle"[^>]*content=")[^"]*(")/,    `$1${esc(ogTitle)}$2`)

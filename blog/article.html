@@ -232,7 +232,8 @@
 
       document.title = pageTitle;
       document.querySelector('meta[name="description"]').content = metaDesc;
-      document.getElementById('canonicalTag').href = canonical;
+      const canonicalEl = document.getElementById('canonicalTag') || document.querySelector('link[rel="canonical"]');
+      if (canonicalEl) canonicalEl.href = canonical;
       document.getElementById('ogTitle').content   = seo.seoTitle || a.title;
       document.getElementById('ogDesc').content    = ogDesc;
       document.getElementById('ogUrl').content     = canonical;
