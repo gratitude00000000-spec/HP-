@@ -1,0 +1,10 @@
+# 環境変数（APIキーを含む）
+.env
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
