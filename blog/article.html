@@ -309,8 +309,8 @@
 
         updateSEO(a);
 
-        const seo  = a.seotitle || {};
-        const slug = seo.slug || a.id;
+        const seo        = a.seotitle || {};
+        const articleSlug = seo.slug || a.id;
         const date = fmtDate(a.publishedAt || a.createdAt);
         const cat  = getCat(a);
         const eyecatchHTML = a.eyecatch
@@ -323,7 +323,7 @@
               <ol>
                 <li><a href="/">ホーム</a></li>
                 <li><a href="/blog">ブログ</a></li>
-                <li><a href="/blog/${slug}">${a.title}</a></li>
+                <li><a href="/blog/${articleSlug}">${a.title}</a></li>
               </ol>
             </nav>
 
@@ -351,9 +351,7 @@
             </section>
           </div>`;
       } catch (err) {
-        console.error('[loadArticle error]', err);
         const is404 = err.code === 404;
-        const errMsg = err && err.message ? err.message : String(err);
         document.getElementById('articleMain').innerHTML = `
           <div class="container-narrow">
             <div class="page-error">
@@ -361,7 +359,6 @@
               <p>${is404
                 ? 'URLをお確かめいただくか、ブログ一覧からご確認ください。'
                 : 'しばらく経ってから再度お試しください。'}</p>
-              <p style="margin-top:12px;font-size:12px;color:#999;word-break:break-all;">DEBUG: ${errMsg}</p>
               <p style="margin-top:28px;"><a class="back-link" href="/blog">← ブログ一覧に戻る</a></p>
             </div>
           </div>`;
