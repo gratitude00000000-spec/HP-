@@ -45,6 +45,36 @@ DRAFTS_DIR.mkdir(exist_ok=True)
 
 SEP = "─" * 60
 
+# ── カテゴリ定義（microCMS ID固定） ──────────────────────────────
+CATEGORIES = {
+    "AI集客":       "9u_-4ryk-k9",
+    "ホームページ制作": "82v_qeo_bf",
+    "MEO対策":      "wbmzxggcg4o9",
+    "集客ノウハウ":   "ggfrebaqv",
+}
+
+# カテゴリ判定キーワード（スコアが高いカテゴリを選択）
+_CATEGORY_KEYWORDS: dict[str, list[str]] = {
+    "MEO対策":      ["meo", "googleマップ", "マップ", "地域", "店舗", "口コミ", "ビジネスプロフィール", "ローカル"],
+    "AI集客":       ["ai", "chatgpt", "生成ai", "ai集客", "aiマーケティング", "llm", "自動化", "チャット"],
+    "ホームページ制作": ["hp", "ホームページ", "ウェブサイト", "web制作", "サイト制作", "lp", "ランディング", "制作費"],
+    "集客ノウハウ":   ["集客", "sns", "マーケティング", "コンテンツ", "リスティング", "広告", "ブログ", "seo"],
+}
+
+def select_category(theme: str, data: dict) -> tuple[str, str]:
+    """テーマと記事データからカテゴリを自動判定。(カテゴリ名, ID) を返す。"""
+    text = (theme + " " + data.get("title", "") + " " + data.get("keywords", "")).lower()
+    scores: dict[str, int] = {name: 0 for name in CATEGORIES}
+    for cat_name, keywords in _CATEGORY_KEYWORDS.items():
+        for kw in keywords:
+            if kw in text:
+                scores[cat_name] += 1
+    best = max(scores, key=lambda k: scores[k])
+    # スコアが0の場合（どのキーワードもマッチしない）は「集客ノウハウ」をデフォルト
+    if scores[best] == 0:
+        best = "集客ノウハウ"
+    return best, CATEGORIES[best]
+
 # ── AI生成プロンプト ───────────────────────────────────────────
 SYSTEM_PROMPT = (
     "あなたはSEO・AI集客専門の日本語Webライターです。"
@@ -139,7 +169,11 @@ def show_preview(data: dict, images: dict | None = None) -> None:
     print(f"📣 OGP説明文 ({ogp_len}文字):")
     print(f"   {data.get('ogpDescription', '')}\n")
     print(f"🔗 スラッグ:    {data.get('slug', '')}")
-    print(f"🔑 キーワード:  {data.get('keywords', '')}\n")
+    print(f"🔑 キーワード:  {data.get('keywords', '')}")
+    if data.get("_category"):
+        print(f"🗂  カテゴリ:    {data['_category']}\n")
+    else:
+        print()
     if images:
         print(f"🖼  アイキャッチ: {images.get('eyecatch') or '(未設定)'}")
         print(f"🖼  OGP画像:     {images.get('ogpImage') or '(未設定)'}\n")
@@ -166,6 +200,8 @@ def build_payload(data: dict, images: dict) -> dict:
         "content":  data["content"],
         "seotitle": seotitle,
     }
+    if data.get("_categoryId"):
+        payload["category"] = data["_categoryId"]
     if images.get("eyecatch"):
         payload["eyecatch"] = {"url": images["eyecatch"]}
 
@@ -242,6 +278,11 @@ def main() -> None:
             draft = json.load(f)
         data   = draft["generated"]
         images = draft.get("images", {})
+        # カテゴリが未設定の旧下書きは再判定
+        if not data.get("_categoryId"):
+            cat_name, cat_id = select_category(draft.get("theme", ""), data)
+            data["_category"]   = cat_name
+            data["_categoryId"] = cat_id
         print(f"\n💾 下書きファイル: {path}")
         print(f"   テーマ: {draft.get('theme', '(不明)')}")
         show_preview(data, images)
@@ -254,6 +295,9 @@ def main() -> None:
             sys.exit(1)
 
         data = generate(theme)
+        cat_name, cat_id = select_category(theme, data)
+        data["_category"]   = cat_name
+        data["_categoryId"] = cat_id
         show_preview(data)
 
         # 画像URL入力
