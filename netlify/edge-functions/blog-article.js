@@ -15,24 +15,24 @@ function stripHtml(s) {
 }
 
 async function fetchArticle(slug) {
+  const headers = { 'X-MICROCMS-API-KEY': MICROCMS_KEY };
+  const base = `https://${MICROCMS_SERVICE}.microcms.io/api/v1/${BLOG_ENDPOINT}`;
+
   // 1. content IDで直接取得
-  const r1 = await fetch(
-    `https://${MICROCMS_SERVICE}.microcms.io/api/v1/${BLOG_ENDPOINT}/${encodeURIComponent(slug)}`,
-    { headers: { 'X-MICROCMS-API-KEY': MICROCMS_KEY } }
-  );
+  const r1 = await fetch(`${base}/${encodeURIComponent(slug)}`, { headers });
   if (r1.ok) return r1.json();
   if (r1.status !== 404) return null;
 
-  // 2. seo.slug フィールドで検索（カスタムスラッグ使用時）
-  const r2 = await fetch(
-    `https://${MICROCMS_SERVICE}.microcms.io/api/v1/${BLOG_ENDPOINT}?filters=seo[slug][equals][${encodeURIComponent(slug)}]&limit=1`,
-    { headers: { 'X-MICROCMS-API-KEY': MICROCMS_KEY } }
-  );
-  if (r2.ok) {
-    const data = await r2.json();
-    if (data.contents && data.contents.length > 0) return data.contents[0];
-  }
-  return null;
+  // 2. seotitle.slug → content ID をリスト取得で解決
+  const r2 = await fetch(`${base}?limit=100&fields=id,seotitle`, { headers });
+  if (!r2.ok) return null;
+  const data = await r2.json();
+  const found = data.contents.find(a => a.seotitle && a.seotitle.slug === slug);
+  if (!found) return null;
+
+  // 3. 解決したIDで記事本体を取得
+  const r3 = await fetch(`${base}/${found.id}`, { headers });
+  return r3.ok ? r3.json() : null;
 }
 
 export default async function handler(request, context) {

@@ -252,8 +252,29 @@
       }
     }
 
+    async function resolveSlugToId(slug) {
+      // sessionStorageでキャッシュ（同一セッション内は再フェッチしない）
+      const cacheKey = 'blog_slug_map';
+      let map = {};
+      try { map = JSON.parse(sessionStorage.getItem(cacheKey) || '{}'); } catch (_) {}
+      if (map[slug]) return map[slug];
+
+      // 記事一覧からid+seotitleだけ軽量取得してslug→ID変換
+      const res = await fetch(
+        `https://${MICROCMS_SERVICE}.microcms.io/api/v1/${BLOG_ENDPOINT}?limit=100&fields=id,seotitle`,
+        { headers: { 'X-MICROCMS-API-KEY': MICROCMS_KEY } }
+      );
+      if (!res.ok) return null;
+      const data = await res.json();
+      data.contents.forEach(a => {
+        if (a.seotitle && a.seotitle.slug) map[a.seotitle.slug] = a.id;
+      });
+      try { sessionStorage.setItem(cacheKey, JSON.stringify(map)); } catch (_) {}
+      return map[slug] || null;
+    }
+
     async function fetchArticleBySlug(slug) {
-      // 1. コンテンツIDで直接取得（microCMSのデフォルト）
+      // 1. コンテンツIDで直接取得
       const r1 = await fetch(
         `https://${MICROCMS_SERVICE}.microcms.io/api/v1/${BLOG_ENDPOINT}/${encodeURIComponent(slug)}`,
         { headers: { 'X-MICROCMS-API-KEY': MICROCMS_KEY } }
@@ -261,16 +282,15 @@
       if (r1.ok) return r1.json();
       if (r1.status !== 404) throw new Error(r1.status);
 
-      // 2. seo.slug フィールドで検索（カスタムスラッグ使用時）
+      // 2. seotitle.slug → content ID を解決してから取得
+      const id = await resolveSlugToId(slug);
+      if (!id) throw Object.assign(new Error('404'), { code: 404 });
+
       const r2 = await fetch(
-        `https://${MICROCMS_SERVICE}.microcms.io/api/v1/${BLOG_ENDPOINT}?filters=seo[slug][equals][${encodeURIComponent(slug)}]&limit=1`,
+        `https://${MICROCMS_SERVICE}.microcms.io/api/v1/${BLOG_ENDPOINT}/${id}`,
         { headers: { 'X-MICROCMS-API-KEY': MICROCMS_KEY } }
       );
-      if (r2.ok) {
-        const data = await r2.json();
-        if (data.contents && data.contents.length > 0) return data.contents[0];
-      }
-
+      if (r2.ok) return r2.json();
       throw Object.assign(new Error('404'), { code: 404 });
     }
 
