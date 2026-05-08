@@ -6,6 +6,14 @@ const MICROCMS_KEY     = 'YRr0JUxPTTGZp9VI6weBvUAeIZqqvbLIRf1m';
 const BLOG_ENDPOINT    = 'blogs';
 const BASE_URL         = 'https://hp.ai-marketing-japan.jp';
 
+// カテゴリID → カテゴリページURL用スラッグ（article.html と同期）
+const CATEGORY_SLUGS = {
+  '9u_-4ryk-k9':  'ai-marketing',
+  '82v_qeo_bf':   'website',
+  'wbmzxggcg4o9': 'meo',
+  'ggfrebaqv':    'marketing',
+};
+
 function esc(s) {
   return (s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
@@ -126,6 +134,33 @@ export default async function handler(request, context) {
       `  <meta name="keywords" content="${esc(seo.keywords)}" />\n</head>`
     );
   }
+
+  // ── BreadcrumbList JSON-LD ──
+  const catObj  = (article.category && typeof article.category === 'object') ? article.category : null;
+  const catName = catObj ? (catObj.name || '') : '';
+  const catId   = catObj ? (catObj.id   || '') : '';
+  const catSlug = CATEGORY_SLUGS[catId] || '';
+
+  const bcItems = (catName && catSlug) ? [
+    { position: 1, name: 'HOME',    item: `${BASE_URL}/` },
+    { position: 2, name: catName,   item: `${BASE_URL}/category/${catSlug}` },
+    { position: 3, name: article.title, item: canonical },
+  ] : [
+    { position: 1, name: 'HOME',    item: `${BASE_URL}/` },
+    { position: 2, name: 'ブログ',   item: `${BASE_URL}/blog` },
+    { position: 3, name: article.title, item: canonical },
+  ];
+
+  const breadcrumbLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: bcItems.map(it => ({ '@type': 'ListItem', ...it })),
+  });
+
+  modified = modified.replace(
+    '</head>',
+    `  <script type="application/ld+json">${breadcrumbLd}</script>\n</head>`
+  );
 
   return new Response(modified, {
     status: 200,

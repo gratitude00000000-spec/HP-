@@ -7,6 +7,9 @@
   <meta name="description" content="AIに選ばれる集客ホームページ制作。初期制作費0円、月額7,980円税抜から。SEO・MEO・AIO・LLMO・AEO・導線設計まで支援します。" />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#0868d7" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <link rel="canonical" href="https://example.com/" />
 
   <meta property="og:type" content="website">
@@ -180,8 +183,8 @@
       transform: rotate(-5deg);
       flex: 0 0 auto;
     }
-    .brand strong { display: block; font-size: 20px; line-height: 1.1; white-space: nowrap; }
-    .brand span { display: block; font-size: 12px; color: rgba(255,255,255,.78); }
+    .brand-service { display: block; font-size: 10px; color: rgba(255,255,255,.58); font-weight: 700; letter-spacing: .07em; line-height: 1.4; margin-bottom: 1px; }
+    .brand-name { display: inline-block; font-family: 'Orbitron', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: .12em; color: #FFD400; line-height: 1.1; white-space: nowrap; text-transform: uppercase; text-shadow: 0 0 10px rgba(255,212,0,.6); padding: 3px 10px; background: rgba(3,21,59,.65); border: 1px solid rgba(255,212,0,.5); border-radius: 5px; margin-top: 2px; }
     .nav {
       display: flex;
       align-items: center;
@@ -250,6 +253,11 @@
       gap: 30px;
       align-items: center;
     }
+    /* ── FV ブランドブロック ── */
+    .fv-brand-block { margin: 16px 0 24px; }
+    .fv-brand-service { margin: 0 0 10px; font-size: 13px; color: rgba(255,255,255,.68); font-weight: 700; letter-spacing: .1em; }
+    .hero-copy .fv-brand-name { display: inline-block; margin: 0; font-family: 'Orbitron', sans-serif; font-size: clamp(54px, 7.5vw, 90px); font-weight: 700; letter-spacing: .12em; color: #FFD400; line-height: 1.2; text-transform: uppercase; text-shadow: 0 0 18px rgba(255,212,0,.65), 0 0 36px rgba(255,212,0,.25); padding: 12px 28px; background: linear-gradient(135deg, rgba(3,21,59,.8), rgba(4,35,95,.65)); border: 1.5px solid rgba(255,212,0,.6); border-radius: 8px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
     .hero-copy h1 {
       margin: 0 0 18px;
       font-size: clamp(36px, 3.8vw, 56px);
@@ -571,7 +579,10 @@
       .section-lead { text-align: center; text-wrap: balance; font-size: 14px; }
       .solution-inner > div > .section-lead { text-align: left; }
       .company-panel .section-lead { text-align: left; }
-      .brand strong { font-size: 17px; }
+      .brand-name { font-size: 15px; letter-spacing: .1em; }
+      .brand-service { font-size: 9px; }
+      .hero-copy .fv-brand-name { font-size: clamp(36px, 10vw, 48px); letter-spacing: .1em; }
+      .fv-brand-service { font-size: 12px; }
       .hero { padding: 40px 0 38px; }
       .hero-copy h1 { font-size: clamp(22px, 5.8vw, 30px); letter-spacing: 0; word-break: keep-all; overflow-wrap: break-word; }
       .comic-label { font-size: 12px; padding: 5px 10px; }
@@ -586,7 +597,8 @@
       .hero-sp-free { display: block; color: var(--yellow); font-size: 13px; font-weight: 900; letter-spacing: .02em; margin-bottom: 16px; padding: 6px 0; }
       .btn-row { gap: 12px; }
       .hero-char-sp { display: none; }
-      .hero-sp-char { display: block; position: absolute; right: -5px; top: 140px; width: 30%; max-width: 140px; z-index: 1; object-fit: contain; object-position: top center; pointer-events: none; }
+      .hero-sp-char { display: block; position: absolute; right: -5px; top: 295px; width: 26%; max-width: 120px; z-index: 1; object-fit: contain; object-position: top center; pointer-events: none; }
+      .hero-copy .fv-brand-name { font-size: clamp(34px, 9.5vw, 48px); padding: 9px 18px; letter-spacing: .1em; }
       .hero-flex-row { display: none; }
       .hero-flex-copy { flex: 1; color: #fff; font-size: 14px; font-weight: 800; line-height: 1.5; margin: 0; }
       .hero-flex-img { flex-shrink: 0; width: 120px; height: 150px; object-fit: contain; object-position: center bottom; display: block; }
@@ -637,7 +649,10 @@
     <div class="container header-inner">
       <a class="brand" href="#top">
         <div class="brand-mark">G</div>
-        <div><strong>株式会社Gratitude</strong><span>AIに選ばれるHP制作</span></div>
+        <div>
+          <span class="brand-service">AIに選ばれる集客型HP制作</span>
+          <strong class="brand-name">AI DRIVE</strong>
+        </div>
       </a>
       <nav class="nav" aria-label="グローバルナビゲーション">
         <a href="#service">特徴</a>
@@ -664,6 +679,10 @@
           <img src="hero.png" alt="AIに選ばれるHP制作" class="hero-sp-char">
           <div class="hero-copy-top">
             <div class="comic-label">初期制作費0円 × AIに選ばれるHP設計</div>
+            <div class="fv-brand-block">
+              <p class="fv-brand-service">AIに選ばれる集客型HP制作</p>
+              <p class="fv-brand-name">AI DRIVE</p>
+            </div>
             <h1>AIに選ばれる時代。<br><span class="yellow">集客できるホームページ</span>を作る！</h1>
             <p class="hero-desc-pc">今の時代、ユーザーは求人応募でも、来店前でも、サービス検討でも、必ず一度ホームページを確認します。だからこそHPは"名刺代わり"ではなく、AI・Google検索・Googleマップから選ばれ、問い合わせ・予約・求人応募につながる設計が必要です。</p>
             <p class="hero-sp-desc">AI・Google検索・Googleマップから選ばれ、<br>問い合わせにつながる設計へ。</p>

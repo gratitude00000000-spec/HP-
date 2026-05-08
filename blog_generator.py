@@ -23,11 +23,22 @@ for _pkg, _install in [("anthropic", "anthropic"), ("requests", "requests")]:
         print(f"  pip install {_install}\n")
         sys.exit(1)
 
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    pass  # python-dotenv なしでも環境変数から読める
+def _load_env() -> None:
+    """スクリプトと同じディレクトリの .env を読み込む（dotenv不要）。"""
+    env_file = Path(__file__).parent / ".env"
+    if not env_file.exists():
+        return
+    for line in env_file.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, val = line.split("=", 1)
+        key = key.strip()
+        val = val.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = val
+
+_load_env()
 
 import anthropic
 import requests
@@ -39,13 +50,14 @@ MICROCMS_WRITE_KEY = os.getenv("MICROCMS_WRITE_API_KEY", "")
 MICROCMS_ENDPOINT  = os.getenv("MICROCMS_ENDPOINT", "blogs")
 CLAUDE_MODEL       = os.getenv("CLAUDE_MODEL", "claude-opus-4-7")
 
-MICROCMS_URL = f"https://{MICROCMS_SERVICE}.microcms.io/api/v1/{MICROCMS_ENDPOINT}"
-DRAFTS_DIR   = Path(__file__).parent / "drafts"
+MICROCMS_URL  = f"https://{MICROCMS_SERVICE}.microcms.io/api/v1/{MICROCMS_ENDPOINT}"
+SITE_BASE_URL = "https://hp.ai-marketing-japan.jp"
+DRAFTS_DIR    = Path(__file__).parent / "drafts"
 DRAFTS_DIR.mkdir(exist_ok=True)
 
 SEP = "─" * 60
 
-# ── カテゴリ定義（microCMS ID固定） ──────────────────────────────
+# ── カテゴリ定義（microCMS ID固定・slug参考） ────────────────────
 CATEGORIES = {
     "AI集客":       "9u_-4ryk-k9",
     "ホームページ制作": "82v_qeo_bf",
@@ -53,12 +65,20 @@ CATEGORIES = {
     "集客ノウハウ":   "ggfrebaqv",
 }
 
-# カテゴリ判定キーワード（スコアが高いカテゴリを選択）
+# カテゴリページURL用スラッグ（将来のカテゴリページ内部リンクに使用）
+CATEGORY_PAGE_SLUGS: dict[str, str] = {
+    "9u_-4ryk-k9":  "ai-marketing",
+    "82v_qeo_bf":   "website",
+    "wbmzxggcg4o9": "meo",
+    "ggfrebaqv":    "marketing",
+}
+
+# カテゴリ判定キーワード（スコアが高いカテゴリを選択。スコア同点は上から優先）
 _CATEGORY_KEYWORDS: dict[str, list[str]] = {
-    "MEO対策":      ["meo", "googleマップ", "マップ", "地域", "店舗", "口コミ", "ビジネスプロフィール", "ローカル"],
-    "AI集客":       ["ai", "chatgpt", "生成ai", "ai集客", "aiマーケティング", "llm", "自動化", "チャット"],
-    "ホームページ制作": ["hp", "ホームページ", "ウェブサイト", "web制作", "サイト制作", "lp", "ランディング", "制作費"],
-    "集客ノウハウ":   ["集客", "sns", "マーケティング", "コンテンツ", "リスティング", "広告", "ブログ", "seo"],
+    "AI集客":       ["ai", "chatgpt", "aio", "llmo", "ai検索", "生成ai", "ai集客", "aiマーケティング"],
+    "ホームページ制作": ["ホームページ", "hp制作", "web制作", "lp制作", "ウェブサイト", "サイト制作", "ランディングページ"],
+    "MEO対策":      ["meo", "gbp", "googleビジネスプロフィール", "googleマップ", "グーグルマップ", "口コミ", "ローカルseo"],
+    "集客ノウハウ":   ["集客", "マーケティング", "売上", "問い合わせ改善", "sns", "コンテンツ", "広告", "seo"],
 }
 
 def select_category(theme: str, data: dict) -> tuple[str, str]:
@@ -74,6 +94,102 @@ def select_category(theme: str, data: dict) -> tuple[str, str]:
     if scores[best] == 0:
         best = "集客ノウハウ"
     return best, CATEGORIES[best]
+
+# ── 内部リンク（関連記事）────────────────────────────────────────
+
+def fetch_existing_articles() -> list:
+    """microCMSから公開済み記事一覧を取得する。失敗時は空リストを返す。"""
+    if not MICROCMS_WRITE_KEY:
+        return []
+    try:
+        res = requests.get(
+            MICROCMS_URL,
+            params={"limit": 100, "fields": "id,title,category,seotitle"},
+            headers={"X-MICROCMS-API-KEY": MICROCMS_WRITE_KEY},
+            timeout=10,
+        )
+        res.raise_for_status()
+        articles = []
+        for a in res.json().get("contents", []):
+            seo = a.get("seotitle") or {}
+            cat = a.get("category") or {}
+            articles.append({
+                "id":          a["id"],
+                "title":       a.get("title", ""),
+                "slug":        seo.get("slug") or a["id"],
+                "category_id": cat.get("id", ""),
+                "keywords":    seo.get("keywords", ""),
+            })
+        return articles
+    except Exception:
+        return []
+
+
+def find_related_articles(new_data: dict, new_cat_id: str, existing: list, max_count: int = 3) -> list:
+    """新規記事に関連する既存記事を最大 max_count 件返す。同カテゴリ優先。"""
+    new_slug = new_data.get("slug", "")
+    new_text = " ".join([
+        new_data.get("title", ""),
+        new_data.get("keywords", ""),
+        re.sub(r"<[^>]+>", " ", new_data.get("content", "")),
+    ]).lower()
+
+    scored = []
+    seen = set()
+    for art in existing:
+        # 自分自身・重複をスキップ
+        if art["slug"] == new_slug or art["id"] in seen:
+            continue
+        seen.add(art["id"])
+
+        score = 0
+        if art["category_id"] == new_cat_id:
+            score += 3  # 同カテゴリ優先
+
+        # 既存記事のキーワードが新記事テキストに含まれる
+        for kw in re.split(r"[,、\s]+", art["keywords"]):
+            kw = kw.strip().lower()
+            if len(kw) >= 2 and kw in new_text:
+                score += 1
+
+        # 既存記事タイトルの2文字以上の語が新記事テキストに含まれる（1回のみ加算）
+        title_words = re.split(r"[\s　・,、。｜|【】「」『』]", art["title"])
+        for word in title_words:
+            if len(word) >= 2 and word.lower() in new_text:
+                score += 1
+                break
+
+        scored.append((score, art))
+
+    scored.sort(key=lambda x: -x[0])
+    return [art for _, art in scored[:max_count]]
+
+
+def build_related_links_html(related: list) -> str:
+    """関連記事セクションのHTMLを生成する。記事がなければ空文字を返す。"""
+    if not related:
+        return ""
+    items = "".join(
+        '<li><a href="{base}/blog/{slug}">{title}</a></li>'.format(
+            base=SITE_BASE_URL, slug=art["slug"], title=art["title"]
+        )
+        for art in related
+    )
+    return (
+        '<section class="related-articles">'
+        "<h2>関連記事</h2>"
+        "<ul>" + items + "</ul>"
+        "</section>"
+    )
+
+
+def append_related_links(content: str, related: list) -> str:
+    """本文末尾に関連記事セクションを追加する。"""
+    html = build_related_links_html(related)
+    if not html:
+        return content
+    return content.rstrip() + "\n" + html
+
 
 # ── AI生成プロンプト ───────────────────────────────────────────
 SYSTEM_PROMPT = (
@@ -171,9 +287,12 @@ def show_preview(data: dict, images: dict | None = None) -> None:
     print(f"🔗 スラッグ:    {data.get('slug', '')}")
     print(f"🔑 キーワード:  {data.get('keywords', '')}")
     if data.get("_category"):
-        print(f"🗂  カテゴリ:    {data['_category']}\n")
-    else:
-        print()
+        print(f"🗂  カテゴリ:    {data['_category']}")
+    if data.get("_relatedArticles"):
+        print(f"🔗 関連記事 ({len(data['_relatedArticles'])}件):")
+        for art in data["_relatedArticles"]:
+            print(f"   ・{art['title']}")
+    print()
     if images:
         print(f"🖼  アイキャッチ: {images.get('eyecatch') or '(未設定)'}")
         print(f"🖼  OGP画像:     {images.get('ogpImage') or '(未設定)'}\n")
@@ -298,6 +417,13 @@ def main() -> None:
         cat_name, cat_id = select_category(theme, data)
         data["_category"]   = cat_name
         data["_categoryId"] = cat_id
+
+        print("\n  関連記事を検索中…")
+        existing = fetch_existing_articles()
+        related  = find_related_articles(data, cat_id, existing)
+        data["content"]          = append_related_links(data["content"], related)
+        data["_relatedArticles"] = related
+
         show_preview(data)
 
         # 画像URL入力

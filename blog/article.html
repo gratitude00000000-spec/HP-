@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <!-- SEO は JS で動的に更新 -->
   <title>ブログ記事｜AI集客ドットコム</title>
   <meta name="description" content="AI集客ドットコムのブログ記事です。" />
@@ -45,8 +48,8 @@
     .header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
     .brand { display: flex; align-items: center; gap: 12px; color: #fff; min-width: 0; }
     .brand-mark { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; border: 3px solid #fff; background: linear-gradient(135deg, var(--yellow), var(--orange)); color: var(--navy); font-weight: 1000; font-size: 24px; transform: rotate(-5deg); flex: 0 0 auto; }
-    .brand strong { display: block; font-size: 20px; line-height: 1.1; white-space: nowrap; }
-    .brand span { display: block; font-size: 12px; color: rgba(255,255,255,.78); }
+    .brand-service { display: block; font-size: 10px; color: rgba(255,255,255,.58); font-weight: 700; letter-spacing: .07em; line-height: 1.4; margin-bottom: 1px; }
+    .brand-name { display: inline-block; font-family: 'Orbitron', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: .12em; color: #FFD400; line-height: 1.1; white-space: nowrap; text-transform: uppercase; text-shadow: 0 0 10px rgba(255,212,0,.6); padding: 3px 10px; background: rgba(3,21,59,.65); border: 1px solid rgba(255,212,0,.5); border-radius: 5px; margin-top: 2px; }
     .nav { display: flex; align-items: center; gap: 18px; color: #fff; font-weight: 1000; font-size: 13px; white-space: nowrap; }
     .nav a { display: inline-flex; align-items: center; line-height: 1; }
     .nav a.active { color: var(--yellow); border-bottom: 2px solid var(--yellow); padding-bottom: 2px; }
@@ -129,6 +132,10 @@
       }
       .menu-toggle { display: flex; }
       .article-cta { padding: 28px 20px; }
+      .breadcrumb ol { font-size: 12px; gap: 4px; }
+      .breadcrumb li:last-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 55vw; }
+      .brand-name { font-size: 16px; letter-spacing: .18em; }
+      .brand-service { font-size: 9px; }
     }
   </style>
 </head>
@@ -138,7 +145,10 @@
     <div class="container header-inner">
       <a class="brand" href="/">
         <div class="brand-mark">G</div>
-        <div><strong>株式会社Gratitude</strong><span>AIに選ばれるHP制作</span></div>
+        <div>
+          <span class="brand-service">AIに選ばれる集客型HP制作</span>
+          <strong class="brand-name">AI DRIVE</strong>
+        </div>
       </a>
       <nav class="nav" aria-label="グローバルナビゲーション">
         <a href="/#service">特徴</a>
@@ -194,6 +204,64 @@
     const MICROCMS_KEY     = 'YRr0JUxPTTGZp9VI6weBvUAeIZqqvbLIRf1m';
     const BLOG_ENDPOINT    = 'blogs';               // microCMSのエンドポイント名
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    const SITE_BASE = 'https://hp.ai-marketing-japan.jp';
+
+    // カテゴリID → カテゴリページURL用スラッグ
+    const CATEGORY_SLUGS = {
+      '9u_-4ryk-k9':  'ai-marketing',
+      '82v_qeo_bf':   'website',
+      'wbmzxggcg4o9': 'meo',
+      'ggfrebaqv':    'marketing',
+    };
+
+    // ── パンくずリスト ──────────────────────────────────────────
+
+    function getBreadcrumbItems(a) {
+      const catObj  = (a.category && typeof a.category === 'object') ? a.category : null;
+      const catId   = catObj ? catObj.id   : '';
+      const catName = catObj ? catObj.name : '';
+      const catSlug = CATEGORY_SLUGS[catId] || '';
+      if (catName && catSlug) {
+        return [
+          { name: 'HOME',    url: '/' },
+          { name: catName,   url: `/category/${catSlug}` },
+          { name: a.title,   url: null },
+        ];
+      }
+      return [
+        { name: 'HOME',  url: '/' },
+        { name: 'ブログ', url: '/blog' },
+        { name: a.title, url: null },
+      ];
+    }
+
+    function renderBreadcrumbHtml(items) {
+      const lis = items.map(item =>
+        item.url
+          ? `<li><a href="${item.url}">${item.name}</a></li>`
+          : `<li aria-current="page">${item.name}</li>`
+      ).join('');
+      return `<nav class="breadcrumb" aria-label="パンくずリスト"><ol>${lis}</ol></nav>`;
+    }
+
+    function injectBreadcrumbJsonLd(items, canonical) {
+      document.querySelectorAll('script[data-type="breadcrumb-ld"]').forEach(el => el.remove());
+      const el = document.createElement('script');
+      el.type = 'application/ld+json';
+      el.dataset.type = 'breadcrumb-ld';
+      el.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: items.map((item, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: item.name,
+          ...(item.url ? { item: SITE_BASE + item.url } : { item: canonical }),
+        })),
+      });
+      document.head.appendChild(el);
+    }
 
     function fmtDate(iso) {
       if (!iso) return '';
@@ -311,8 +379,12 @@
 
         updateSEO(a);
 
-        const seo        = a.seotitle || {};
+        const seo         = a.seotitle || {};
         const articleSlug = seo.slug || a.id;
+        const canonical   = `${SITE_BASE}/blog/${articleSlug}`;
+        const bcItems     = getBreadcrumbItems(a);
+        injectBreadcrumbJsonLd(bcItems, canonical);
+
         const date = fmtDate(a.publishedAt || a.createdAt);
         const cat  = getCat(a);
         const eyecatchHTML = a.eyecatch
@@ -321,13 +393,7 @@
 
         document.getElementById('articleMain').innerHTML = `
           <div class="container-narrow">
-            <nav class="breadcrumb" aria-label="パンくずリスト">
-              <ol>
-                <li><a href="/">ホーム</a></li>
-                <li><a href="/blog">ブログ</a></li>
-                <li><a href="/blog/${articleSlug}">${a.title}</a></li>
-              </ol>
-            </nav>
+            ${renderBreadcrumbHtml(bcItems)}
 
             <section class="article-hero">
               <div class="article-hero-meta">
