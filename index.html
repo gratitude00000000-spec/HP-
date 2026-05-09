@@ -437,11 +437,18 @@
     .plan-name { margin: 0; font-size: 25px; font-weight: 1000; line-height: 1.2; }
     .pricing-card.featured .plan-name { color: var(--yellow); text-shadow: 2px 2px 0 rgba(0,0,0,.22); }
     .plan-sub { font-size: 13px; opacity: .9; font-weight: 900; margin-top: 6px; }
-    .plan-price { text-align: center; padding: 24px 18px 4px; font-size: 44px; font-weight: 1000; line-height: 1.08; }
+    .plan-subtitle { font-size: 11px; font-weight: 700; opacity: .8; margin-top: 3px; letter-spacing: .03em; }
+    .plan-price { text-align: center; padding: 24px 18px 4px; font-size: 38px; font-weight: 1000; line-height: 1.08; }
     .plan-price small { font-size: 14px; font-weight: 900; color: var(--muted); }
-    .pricing-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 18px; flex: 1; justify-content: space-between; }
+    .plan-price.price-consult { font-size: 28px; }
+    .pricing-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 14px; flex: 1; justify-content: space-between; }
     .pricing-body ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-weight: 800; }
     .pricing-body li::before { content: "✓"; color: var(--blue); margin-right: 9px; font-weight: 1000; }
+    .plan-recommend-label { font-size: 12px; font-weight: 1000; color: var(--blue); border-bottom: 3px solid var(--yellow); padding-bottom: 4px; margin-bottom: 6px; display: block; }
+    .plan-recommend-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+    .plan-recommend-list li { font-size: 13px; font-weight: 800; }
+    .plan-recommend-list li::before { content: "👤"; margin-right: 6px; }
+    .plan-cta-note { font-size: 13px; font-weight: 800; text-align: center; margin-top: -4px; }
 
     .faq-wrap { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .faq-item { background: #fff; border: 4px solid var(--line); border-radius: 16px; box-shadow: 5px 5px 0 rgba(0,0,0,.12); overflow: hidden; }
@@ -864,11 +871,88 @@
 
     <section class="section" id="pricing">
       <div class="container">
-        <div class="center fade-up"><div class="comic-label">PRICE!</div><h2 class="section-title">料金プラン</h2><p class="section-lead">初期制作費0円。必要な範囲から始めて、後から強化できます。</p></div>
+        <div class="center fade-up"><div class="comic-label">PRICE!</div><h2 class="section-title">目的に合わせて選べる3プラン</h2><p class="section-lead">必要な機能を、ムダなく。成果に繋がるHPを</p></div>
         <div class="grid pricing-grid">
-          <article class="pricing-card fade-up"><div class="pricing-head"><h3 class="plan-name">見せるHPプラン</h3><div class="plan-sub">簡易的なHPをまず持ちたい方に</div></div><div class="plan-price">¥7,980 <small>/月・税抜</small><br><small>税込 ¥8,778</small></div><div class="pricing-body"><ul><li>初期制作費0円</li><li>トップページ＋下層最大5ページ</li><li>スマホ対応</li><li>基本SEO設計</li><li>お問い合わせフォーム設置</li></ul><a class="btn btn-white" href="#contact">このプランで相談</a></div></article>
-          <article class="pricing-card featured fade-up"><div class="plan-ribbon">おすすめ</div><div class="pricing-head"><h3 class="plan-name">集客導線プラン</h3><div class="plan-sub">AI・SEO・MEOまで整えたい方に</div></div><div class="plan-price">¥19,800 <small>/月・税抜</small><br><small>税込 ¥21,780</small></div><div class="pricing-body"><ul><li>初期制作費0円</li><li>SEO・MEO導線設計</li><li>AI検索対策（AIO/LLMO）</li><li>GBP連携設計</li><li>電話・メールサポート</li></ul><a class="btn btn-primary" href="#contact">おすすめで相談</a></div></article>
-          <article class="pricing-card fade-up"><div class="pricing-head"><h3 class="plan-name">AI最適化プラン</h3><div class="plan-sub">AI検索・集客導線をさらに強化したい方に</div></div><div class="plan-price">¥29,800 <small>/月・税抜</small><br><small>税込 ¥32,780</small></div><div class="pricing-body"><ul><li>初期制作費0円</li><li>AI検索向けコンテンツ設計</li><li>SEO・MEO・AI導線の強化</li><li>公開後サポート強化</li></ul><a class="btn btn-white" href="#contact">上位プランを相談</a></div></article>
+          <article class="pricing-card fade-up">
+            <div class="pricing-head">
+              <h3 class="plan-name">START</h3>
+              <div class="plan-subtitle">ライトプラン</div>
+              <div class="plan-sub">まずはHPを持ちたい方に</div>
+            </div>
+            <div class="plan-price">¥7,980<small>円〜/月・税抜</small><br><small>税込 ¥8,778円〜</small></div>
+            <div class="pricing-body">
+              <div>
+                <span class="plan-recommend-label">こんな方におすすめ！</span>
+                <ul class="plan-recommend-list">
+                  <li>とりあえずHPが欲しい</li>
+                  <li>名刺代わりに使いたい</li>
+                  <li>最低限から始めたい</li>
+                </ul>
+              </div>
+              <ul>
+                <li>スマホ対応</li>
+                <li>基本SEO対策</li>
+                <li>シンプル構成</li>
+                <li>お問い合わせフォーム</li>
+              </ul>
+              <p class="plan-cta-note">はじめの一歩をしっかりサポート！</p>
+              <a class="btn btn-white" href="#contact">このプランで相談</a>
+            </div>
+          </article>
+          <article class="pricing-card featured fade-up">
+            <div class="plan-ribbon">おすすめ！</div>
+            <div class="pricing-head">
+              <h3 class="plan-name">GROW</h3>
+              <div class="plan-subtitle">スタンダードプラン</div>
+              <div class="plan-sub">集客を本気で強化したい方に</div>
+            </div>
+            <div class="plan-price">¥12,800<small>円〜/月・税抜</small><br><small>税込 ¥14,080円〜</small></div>
+            <div class="pricing-body">
+              <div>
+                <span class="plan-recommend-label">こんな方におすすめ！</span>
+                <ul class="plan-recommend-list">
+                  <li>集客を強化したい</li>
+                  <li>Google検索で上位を狙いたい</li>
+                  <li>問い合わせを増やしたい</li>
+                </ul>
+              </div>
+              <ul>
+                <li>SEO設計</li>
+                <li>MEO導線設計</li>
+                <li>AI検索（AIO/LLMO）対応</li>
+                <li>お問い合わせ導線設計</li>
+                <li>コンテンツ最適化</li>
+              </ul>
+              <p class="plan-cta-note">集客力をしっかり強化！</p>
+              <a class="btn btn-primary" href="#contact">おすすめで相談</a>
+            </div>
+          </article>
+          <article class="pricing-card fade-up">
+            <div class="pricing-head">
+              <h3 class="plan-name">AI DRIVE PRO</h3>
+              <div class="plan-subtitle">プレミアムプラン</div>
+              <div class="plan-sub">本気で事業を伸ばしたい方に</div>
+            </div>
+            <div class="plan-price price-consult">要相談</div>
+            <div class="pricing-body">
+              <div>
+                <span class="plan-recommend-label">こんな方におすすめ！</span>
+                <ul class="plan-recommend-list">
+                  <li>本気で事業を成長させたい</li>
+                  <li>求人や採用も強化したい</li>
+                  <li>継続的に改善・運用したい</li>
+                </ul>
+              </div>
+              <ul>
+                <li>ブログ戦略・運用サポート</li>
+                <li>AI最適化の強化（AIO/LLMO）</li>
+                <li>導線分析・改善提案</li>
+                <li>高度なSEO・MEO対策</li>
+              </ul>
+              <p class="plan-cta-note">成果を最大化するフルサポート！</p>
+              <a class="btn btn-white" href="#contact">上位プランを相談</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
