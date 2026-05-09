@@ -284,6 +284,30 @@
       text-wrap: balance;
     }
     .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    @keyframes fv-shake-zero {
+      0%, 100% { transform: rotate(.8deg) translateY(0); }
+      25%       { transform: rotate(1.6deg) translateY(-2px); }
+      50%       { transform: rotate(.1deg) translateY(1px); }
+      75%       { transform: rotate(1.3deg) translateY(-1px); }
+    }
+    @keyframes fv-shake-b1 {
+      0%, 100% { transform: rotate(-1deg) translateY(0); }
+      25%       { transform: rotate(-.1deg) translateY(-2px); }
+      50%       { transform: rotate(-1.8deg) translateY(1px); }
+      75%       { transform: rotate(-.4deg) translateY(-1px); }
+    }
+    @keyframes fv-shake-b2 {
+      0%, 100% { transform: rotate(1deg) translateY(0); }
+      25%       { transform: rotate(1.9deg) translateY(-2px); }
+      50%       { transform: rotate(.2deg) translateY(1px); }
+      75%       { transform: rotate(1.6deg) translateY(-1px); }
+    }
+    @keyframes fv-shake-b3 {
+      0%, 100% { transform: rotate(-2deg) translateY(0); }
+      25%       { transform: rotate(-1.1deg) translateY(-2px); }
+      50%       { transform: rotate(-2.8deg) translateY(1px); }
+      75%       { transform: rotate(-1.5deg) translateY(-1px); }
+    }
     .hero-badge {
       background: #fff;
       color: var(--ink);
@@ -292,10 +316,11 @@
       padding: 8px 12px;
       font-weight: 1000;
       box-shadow: 4px 4px 0 rgba(0,0,0,.22);
-      transform: rotate(-1deg);
+      animation: fv-shake-b1 3.5s ease-in-out infinite;
+      transform-origin: center;
     }
-    .hero-badge:nth-child(2) { transform: rotate(1deg); }
-    .hero-badge:nth-child(3) { transform: rotate(-2deg); }
+    .hero-badge:nth-child(2) { animation: fv-shake-b2 3.5s ease-in-out infinite; animation-delay: .5s; }
+    .hero-badge:nth-child(3) { animation: fv-shake-b3 3.5s ease-in-out infinite; animation-delay: 1s; }
     .zero-badge {
       display: inline-flex;
       align-items: center;
@@ -308,7 +333,16 @@
       font-weight: 1000;
       font-size: 18px;
       box-shadow: 6px 6px 0 rgba(0,0,0,.18);
-      transform: rotate(.8deg);
+      animation: fv-shake-zero 3.5s ease-in-out infinite;
+      animation-delay: 1.5s;
+      transform-origin: center;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .zero-badge, .hero-badge { animation: none; }
+      .zero-badge { transform: rotate(.8deg); }
+      .hero-badge { transform: rotate(-1deg); }
+      .hero-badge:nth-child(2) { transform: rotate(1deg); }
+      .hero-badge:nth-child(3) { transform: rotate(-2deg); }
     }
     .zero-badge strong { color: var(--blue); font-size: 30px; margin: 0 4px; }
 
