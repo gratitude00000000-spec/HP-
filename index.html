@@ -1192,11 +1192,7 @@
       const dots  = document.querySelectorAll('.pricing-dot');
       if (!grid || !hint) return;
 
-      let scrolled = false;
       grid.addEventListener('scroll', () => {
-        /* 矢印：30px以上スクロールしたら消す */
-        if (!scrolled && grid.scrollLeft > 30) { scrolled = true; hint.classList.add('hidden'); }
-
         /* ドット：現在のカード index を算出 */
         const cards = grid.querySelectorAll('.pricing-card');
         const scrollLeft = grid.scrollLeft;
